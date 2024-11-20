@@ -59,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Login</title>
     <script>
         function togglePasswordVisibility() {
@@ -87,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="#">
 
                 <div class="form-group  mt-4">
-                    <label for="role" class="h5">Role:</label>
+                    <label for="role">Role:</label>
                     <select name="role" class="form-control" required>
                         <option value="" selected disabled>Select Role</option>
                         <option value="admin">Admin</option>
@@ -99,8 +100,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="form-group mt-3">
                     <label for="username">Username:</label>
-                    <input type="text" name="username" class="form-control" required>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter username" required>
                 </div>
+
+                <div class="form-group mt-2">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required>
+                </div>
+
+                <div class="form-group mt-2">
+                    <button type="button" id="togglePassword" class="btn btn-sm btn-outline-dark" onclick="togglePasswordVisibility()">Show Password</button>
+
+                    <a href="" class="btn btn-sm btn-outline-dark">Forgot your password</a>
+                </div>
+                
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-danger w-100">Login</button>
+                </div>
+
 
                 
 
