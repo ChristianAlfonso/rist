@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Determine the correct table based on role
     $query = "";
     if ($role === 'admin') {
-        $query = "SELECT * FROM admin WHERE username='$username'";
+        $query = "SELECT * FROM admin WHERE username='$username' AND password='$password'";
     } elseif ($role === 'teacher') {
         $query = "SELECT * FROM teachers WHERE username='$username'";
     } elseif ($role === 'parent') {
@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($result && mysqli_num_rows($result) > 0) {
             $user = mysqli_fetch_assoc($result);
-            if (password_verify($password, $user['password'])) {
                 // Set session variables based on role
                 $_SESSION[$role . '_logged_in'] = true;
                 $_SESSION[$role . '_username'] = $username;
@@ -49,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>alert('User not found.');</script>";
         }
     }
-}
+
 ?>
 
 <!DOCTYPE html>
