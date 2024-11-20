@@ -1,0 +1,18 @@
+{
+    "name": "chico/rist",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "Chico\\Rist\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "chico",
+            "email": "lenchicojohnkyle@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^2.2"
+    }
+}
