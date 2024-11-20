@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             
-            <form action="#">
+            <form method="POST" action="login.php">
 
                 <div class="form-group  mt-4">
                     <label for="role">Role:</label>
@@ -117,13 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="form-group mt-3">
                     <button type="submit" class="btn btn-danger w-100">Login</button>
                 </div>
-
-
-                
-
-                
-                
-                
+  
             </form>
         </div>
     </div>
