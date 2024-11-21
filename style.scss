@@ -1,7 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap');
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Funnel Display", sans-serif;
+    scroll-behavior: smooth;
+}
+
+.landing-page {
+    min-width: 1200px;
+
+    .navbar {
+        .navbar-brand {
+            img {
+                width: 50px;
+            }
+            h4 {
+                font-weight: bold;
+            }
+        }
+
+        .collapse {
+            .nav {
+                .nav-item {
+                    .nav-link {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+
+    .hero-section {
+        position: relative;
+        background-image: url(images/hero-bg.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        height: 80vh;
+        overflow: hidden;
+
+        .hero-title, .hero-button {
+            width: 100%;
+        }
+        
+    }
+    
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Adjust opacity for darkness */
+        z-index: 1;
+    }
+    
+    .hero-content {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 2; /* Ensure content appears above the overlay */
+    }
+
+
+    .announcement-section {
+        height: auto;
+        
+        
+       
+
+        .news {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+            .card {
+                width: 400px;
+                height: 400px;
+            }
+        }
+    }
+
+    .about-section {
+        height: auto;
+        background: url(images/backgroundwebsite.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        .about-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .carousel {
+                flex: 1;
+
+                .carousel-inner {
+
+                    
+                    .carousel-item {
+                        img {
+                            width: 900px;
+                            height: 60vh;
+                            aspect-ratio: 2/2;
+                        }
+                    }
+                }
+            }
+
+            .about-text {
+                flex: 1;
+                height: auto;
+            }
+        }
+
+        
+    }
+
+ 
+    
 }
 
 .login-page {
@@ -16,3 +143,5 @@
         border-radius: 10px;
     }
 }
+
+
