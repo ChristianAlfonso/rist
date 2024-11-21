@@ -1,0 +1,177 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling for background, font, and layout */
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(218, 215, 215, 0.993);
+    background-image: url('images/backgroundwebsite.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    align-items: center; /* Centers items horizontally */
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Centering Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Header styling */
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers header content */
+    align-items: center;
+    background-color: rgba(247, 240, 240, 0.986);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Navigation styling within header */
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav img {
+    height: 60px;
+    width: auto;
+    margin-right: 10px;
+}
+
+/* Logo text styling in the header */
+.logo_text {
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(221, 14, 14, 0.945);
+    line-height: normal;
+}
+
+/* Heading styling */
+h1, h2, h3 {
+    color: #ff0000;
+    background-color: rgba(247, 240, 240, 0.986);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+/* List styling */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+}
+
+/* Link styling */
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Login Container styling */
+.login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Input and Select styling for form fields */
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: block; /* Ensures inputs stack */
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+    margin: 20px 0;
+    text-align: center;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styling for Action Buttons (Delete, Edit, etc.) */
+.button {
+    background-color: #ff0000;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.button:hover {
+    background-color: #e60000;
+}
+
+/* Announcement Container Styling */
+.announcement {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgba(255, 204, 204, 0.8);
+    border-radius: 5px;
+    color: #333;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
