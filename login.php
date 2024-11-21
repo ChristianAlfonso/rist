@@ -26,10 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($result && mysqli_num_rows($result) > 0) {
             $user = mysqli_fetch_assoc($result);
+            //niremove ko lang yung password_verify since hinardcode ko lang yung password for now pero eto yung lime if ever need nyo na ulet
+            // if (password_verify($password, $user['password'])) {}
                 // Set session variables based on role
                 $_SESSION[$role . '_logged_in'] = true;
                 $_SESSION[$role . '_username'] = $username;
-
+                $_SESSION[$role . '_id'] = $user['id'];
                 // Redirect to the appropriate dashboard
                 if ($role === 'admin') {
                     header("Location: admin_dashboard.php");
