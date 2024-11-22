@@ -32,7 +32,7 @@
 
                     // Redirect to the appropriate dashboard
                     if ($role === 'admin') {
-                        header("Location: admin_dashboard.php");
+                        header("Location: admin_announcements.php");
                     } elseif ($role === 'teacher') {
                         header("Location: teacher_dashboard.php");
                     } elseif ($role === 'parent') {
