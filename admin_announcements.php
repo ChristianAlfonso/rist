@@ -64,69 +64,173 @@ if (isset($_GET['edit_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    
     <title>Admin Announcements</title>
+    
 </head>
+<style>
+
+
+    .admin-announcement-page {
+        min-width: 1200px;
+    }
+
+  
+
+    .nav-item {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .nav-item:hover{
+        background-color: #f6ded7;
+    }
+    .nav-item a {
+        text-decoration: none;
+        color: #982718;
+        font-weight: bold;
+    }
+    
+
+    img {
+        width: 50px;
+    }
+
+    .sidebar {
+        width: 300px;
+    }
+    
+</style>
 <body>
 
-    <h2><?php echo isset($edit_announcement) ? 'Edit Announcement' : 'Post Announcement'; ?></h2>
+<div class="admin-announcement-page d-flex">
+    <div class="sidebar shadow p-3">
+        <div class="sidebar-title d-flex align-items-center">
+            <img src="images/logo.png" alt="">
+            <h5>Admin Dashboard</h5>
+        </div>
 
-    <!-- Announcement Form for adding/editing -->
-    <form method="POST" action="admin_announcements.php">
-        <input type="hidden" name="id" value="<?php echo isset($edit_announcement) ? $edit_announcement['id'] : ''; ?>">
-        
-        <label for="title">Title:</label><br>
-        <input type="text" name="title" value="<?php echo isset($edit_announcement) ? $edit_announcement['title'] : ''; ?>" required><br>
+        <div class="sidebar-menu mt-3">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="admin_announcements.php">Announcements</a>
+                </li>
 
-        <label for="content">Content:</label><br>
-        <textarea name="content" rows="5" required><?php echo isset($edit_announcement) ? $edit_announcement['content'] : ''; ?></textarea><br>
+                <li class="nav-item">
+                    <a href="change_password.php">Change Password</a>
+                </li>
 
-        <label for="audience">Audience:</label><br>
-        <select name="audience" required>
-            <option value="students" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'students') echo 'selected'; ?>>Students</option>
-            <option value="parents" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'parents') echo 'selected'; ?>>Parents</option>
-            <option value="teachers" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'teachers') echo 'selected'; ?>>Teachers</option>
-            <option value="all" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'all') echo 'selected'; ?>>All</option>
-        </select><br><br>
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Students
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="register_student.php">Register Students</a></li>
+                            <li><a class="dropdown-item" href="import_students.php">Import Students</a></li>
+                            <li><a class="dropdown-item" href="users_students.php">View Students</a></li>
+                        </ul>
+                </li>
 
-        <button type="submit" name="<?php echo isset($edit_announcement) ? 'update_announcement' : 'add_announcement'; ?>">
-            <?php echo isset($edit_announcement) ? 'Update Announcement' : 'Post Announcement'; ?>
-        </button>
-    </form>
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Teachers
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="register_teacher.php">Register Teachers</a></li>
+                            <li><a class="dropdown-item" href="import_teachers.php">Import Teachers</a></li>
+                            <li><a class="dropdown-item" href="users_teachers.php">View Teachers</a></li>
+                        </ul>
+                </li>
 
-    <hr>
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Parents
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="register_parent.php">Register Parents</a></li>
+                            <li><a class="dropdown-item" href="import_parents.php">Import Parents</a></li>
+                            <li><a class="dropdown-item" href="users_parents.php">View Parents</a></li>
+                        </ul>
+                </li>
 
-    <h2>Manage Announcements</h2>
+                <li class="nav-item">
+                    <a href="logout.php">Logout</a>
+                </li>
 
-    <!-- List of announcements with Edit and Delete options -->
-    <?php
-    // Fetch all announcements
-    $query = "SELECT * FROM announcements ORDER BY date_posted DESC";
-    $result = mysqli_query($conn, $query);
 
-    if (mysqli_num_rows($result) > 0) {
-        echo "<table border='1'>";
-        echo "<tr><th>Title</th><th>Content</th><th>Audience</th><th>Date Posted</th><th>Actions</th></tr>";
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>" . $row['title'] . "</td>";
-            echo "<td>" . $row['content'] . "</td>";
-            echo "<td>" . $row['audience'] . "</td>";
-            echo "<td>" . $row['date_posted'] . "</td>";
-            echo "<td>
-                    <a href='admin_announcements.php?edit_id=" . $row['id'] . "'>Edit</a> |
-                    <a href='admin_announcements.php?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this announcement?\");'>Delete</a>
-                  </td>";
-            echo "</tr>";
-        }
+            </ul>
+        </div>
+    </div>
 
-        echo "</table>";
-    } else {
-        echo "No announcements found.";
-    }
-    ?>
-<a href="admin_dashboard.php">Back</a>
+    <div class="main-content flex-grow-1 p-3">
+        <h2><?php echo isset($edit_announcement) ? 'Edit Announcement' : 'Post Announcement'; ?></h2>
+            <div class="container shadow  p-5">
+                <form method="POST" action="admin_announcements.php">
+                        <input type="hidden" name="id" value="<?php echo isset($edit_announcement) ? $edit_announcement['id'] : ''; ?>">
+                        
+                        <label for="title" class="h3">Title:</label><br>
+                        <input type="text" class="form-control" name="title" value="<?php echo isset($edit_announcement) ? $edit_announcement['title'] : ''; ?>" required><br>
+
+                        <label for="content" class="h3">Content:</label><br>
+                        <textarea name="content"class="form-control" rows="5" required><?php echo isset($edit_announcement) ? $edit_announcement['content'] : ''; ?></textarea><br>
+
+                        <label for="audience" class="h3">Audience:</label><br>
+                        <select name="audience" class="form-control" required>
+                            <option value="students" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'students') echo 'selected'; ?>>Students</option>
+                            <option value="parents" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'parents') echo 'selected'; ?>>Parents</option>
+                            <option value="teachers" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'teachers') echo 'selected'; ?>>Teachers</option>
+                            <option value="all" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'all') echo 'selected'; ?>>All</option>
+                        </select><br><br>
+
+                        <button type="submit" class="btn btn-danger" name="<?php echo isset($edit_announcement) ? 'update_announcement' : 'add_announcement'; ?>">
+                            <?php echo isset($edit_announcement) ? 'Update Announcement' : 'Post Announcement'; ?>
+                        </button>
+                </form>
+            </div>
+
+        <h2 class="mt-3">Manage Announcements</h2>
+
+            <div class="container shadow p-3">
+
+                <!-- List of announcements with Edit and Delete options -->
+                <?php
+                // Fetch all announcements
+                $query = "SELECT * FROM announcements ORDER BY date_posted DESC";
+                $result = mysqli_query($conn, $query);
+
+                if (mysqli_num_rows($result) > 0) {
+                    echo "<table class='table table-bordered table-stripped'>";
+                    echo "<tr class='bg-danger text-light'><th>Title</th><th>Content</th><th>Audience</th><th>Date Posted</th><th>Actions</th></tr>";
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['title'] . "</td>";
+                        echo "<td>" . $row['content'] . "</td>";
+                        echo "<td>" . $row['audience'] . "</td>";
+                        echo "<td>" . $row['date_posted'] . "</td>";
+                        echo "<td>
+                                <a class='btn btn-dark' href='admin_announcements.php?edit_id=" . $row['id'] . "'>Edit</a> |
+                                <a class='btn btn-danger' href='admin_announcements.php?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this announcement?\");'>Delete</a>
+                            </td>";
+                        echo "</tr>";
+                    }
+
+                    echo "</table>";
+                } else {
+                    echo "No announcements found.";
+                }
+                ?>
+            </div>
+
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
