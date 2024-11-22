@@ -204,36 +204,35 @@ $students_result = mysqli_query($conn, $students_query);
 
   
    
- 
-    
-            <table class="table table-striped table-bordered nowrap" id="example">
-                <thead>
-                    <tr>
-                        <th>LRN</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Year</th>
-                        <th>Section</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($students_result)) { ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($row['lrn']); ?></td>
-                        <td><?php echo htmlspecialchars($row['first_name'] . ' ' . $row['last_name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['email']); ?></td>
-                        <td><?php echo htmlspecialchars($row['year']); ?></td>
-                        <td><?php echo htmlspecialchars($row['section']); ?></td>
-                        <td>
-                            <a class="btn btn-dark" href="edit_student.php?lrn=<?php echo urlencode($row['lrn']); ?>">Edit</a> 
-                            <a class="btn btn-danger" href="users_students.php?delete_lrn=<?php echo urlencode($row['lrn']); ?>" onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
-                        </td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-
+            <div class="container-fluid shadow p-3">
+                <table class="table table-striped table-bordered nowrap" id="example">
+                    <thead>
+                        <tr>
+                            <th>LRN</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Year</th>
+                            <th>Section</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = mysqli_fetch_assoc($students_result)) { ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['lrn']); ?></td>
+                            <td><?php echo htmlspecialchars($row['first_name'] . ' ' . $row['last_name']); ?></td>
+                            <td><?php echo htmlspecialchars($row['email']); ?></td>
+                            <td><?php echo htmlspecialchars($row['year']); ?></td>
+                            <td><?php echo htmlspecialchars($row['section']); ?></td>
+                            <td>
+                                <a class="btn btn-dark" href="edit_student.php?lrn=<?php echo urlencode($row['lrn']); ?>">Edit</a> 
+                                <a class="btn btn-danger" href="users_students.php?delete_lrn=<?php echo urlencode($row['lrn']); ?>" onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
             
 
             <?php
@@ -249,7 +248,7 @@ $students_result = mysqli_query($conn, $students_query);
             }
             ?>
     </div>
-    
+
 </div>
 
 
