@@ -148,11 +148,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="main-content flex-grow-1 p-3">
 
-    <div class="container-fluid d-flex justify-content-between">
-    <h2>Register Student</h2>
-    <button class="navbar-toggler navbar-light burger" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" aria-controls="demo">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="container-fluid d-flex justify-content-between">
+                <h2>Register Student</h2>
+                <button class="navbar-toggler navbar-light burger" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" aria-controls="demo">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
                 <!-- Offcanvas Sidebar -->
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="demo" aria-labelledby="offcanvasDemoLabel">

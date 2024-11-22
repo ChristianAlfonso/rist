@@ -233,5 +233,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['student_file'])) {
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script>
+          // Auto close offcanvas when screen size changes
+          window.addEventListener('resize', function() {
+            if (window.innerWidth > 700) {
+                var offcanvasElement = document.getElementById('demo');
+                var offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                if (offcanvasInstance) {
+                    offcanvasInstance.hide();
+                }
+            }
+        });
+    </script>
 </body>
 </html>
