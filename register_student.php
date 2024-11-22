@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   VALUES ('$lrn', '$last_name', '$first_name', '$middle_initial', '$email', '$year', '$section', '$username', '$password')";
         
         if (mysqli_query($conn, $query)) {
-            echo "<script>alert('Student registered successfully!'); window.location='admin_dashboard.php';</script>";
+            echo "<script>alert('Student registered successfully!'); window.location='users_students.php';</script>";
         } else {
             echo "Error: " . mysqli_error($conn);
         }
@@ -36,55 +36,165 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Register Student</title>
-    <script>
-        function togglePasswordVisibility() {
-            const passwordField = document.getElementById('password');
-            const toggleButton = document.getElementById('togglePassword');
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                toggleButton.innerText = 'Hide Password';
-            } else {
-                passwordField.type = 'password';
-                toggleButton.innerText = 'Show Password';
-            }
-        }
-    </script>
 </head>
+<style>
+
+    .admin-register-student {
+        min-width: 1200px;
+    }
+    .nav-item {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .nav-item:hover{
+        background-color: #f6ded7;
+    }
+    .nav-item a {
+        text-decoration: none;
+        color: #982718;
+        font-weight: bold;
+    }
+    
+
+    img {
+        width: 50px;
+    }
+
+    .sidebar {
+        width: 300px;
+    }
+</style>
 <body>
-    <h2>Register Student</h2>
-    <form method="POST" action="register_student.php">
-        <label for="lrn">LRN:</label><br>
-        <input type="text" name="lrn" required><br>
-        
-        <label for="last_name">Last Name:</label><br>
-        <input type="text" name="last_name" required><br>
 
-        <label for="first_name">First Name:</label><br>
-        <input type="text" name="first_name" required><br>
 
-        <label for="middle_initial">Middle Initial:</label><br>
-        <input type="text" name="middle_initial" required><br>
+<div class="admin-register-student d-flex">
+    <div class="sidebar shadow p-3">
+        <div class="sidebar-title d-flex align-items-center">
+            <img src="images/logo.png" alt="">
+            <h5>Admin Dashboard</h5>
+        </div>
 
-        <label for="email">Email:</label><br>
-        <input type="email" name="email" required><br>
+        <div class="sidebar-menu mt-3">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="admin_announcements.php">Announcements</a>
+                </li>
 
-        <label for="year">Year:</label><br>
-        <input type="text" name="year" required><br>
+                <li class="nav-item">
+                    <a href="change_password.php">Change Password</a>
+                </li>
 
-        <label for="section">Section:</label><br>
-        <input type="text" name="section" required><br>
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Students
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="register_student.php">Register Students</a></li>
+                            <li><a class="dropdown-item" href="import_students.php">Import Students</a></li>
+                            <li><a class="dropdown-item" href="users_students.php">View Students</a></li>
+                        </ul>
+                </li>
 
-        <label for="username">Username:</label><br>
-        <input type="text" name="username" required><br>
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Teachers
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="register_teacher.php">Register Teachers</a></li>
+                            <li><a class="dropdown-item" href="import_teachers.php">Import Teachers</a></li>
+                            <li><a class="dropdown-item" href="users_teachers.php">View Teachers</a></li>
+                        </ul>
+                </li>
 
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <button type="button" id="togglePassword" onclick="togglePasswordVisibility()">Show Password</button><br><br>
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Parents
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="register_parent.php">Register Parents</a></li>
+                            <li><a class="dropdown-item" href="import_parents.php">Import Parents</a></li>
+                            <li><a class="dropdown-item" href="users_parents.php">View Parents</a></li>
+                        </ul>
+                </li>
 
-        <button type="submit">Register</button>
-    </form>
+                <li class="nav-item">
+                    <a href="logout.php">Logout</a>
+                </li>
+
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content flex-grow-1 p-3">
+        <h2>Register Student</h2>
+
+        <div class="container shadow p-4">
+            <form method="POST" action="register_student.php">
+
+                <div class="form-group">
+                    <label for="lrn">LRN:</label><br>
+                    <input type="text" name="lrn" class="form-control" required>
+                </div>
+                
+
+                <div class="d-flex" style="gap: 5px">
+                    
+                    <div class="form-group" style="flex: 1;">
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" name="last_name" class="form-control"  required>
+                    </div>
+
+                    <div class="form-group" style="flex: 1;">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" name="first_name" class="form-control"  required>
+                    </div>
+
+                    <div class="form-group" style="flex: 1;">
+                        <label for="middle_initial">Middle Initial:</label>
+                        <input type="text" name="middle_initial" class="form-control"  required>
+                    </div>
+
+                </div>
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" class="form-control" required>
+
+                <label for="year">Year:</label>
+                <input type="text" name="year" class="form-control" required>
+
+                <label for="section">Section:</label>
+                <input type="text" name="section" class="form-control" required>
+
+                <label for="username">Username:</label>
+                <input type="text" name="username" class="form-control" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+
+                <button type="submit" class="btn btn-danger mt-1">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
