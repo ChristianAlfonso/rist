@@ -11,7 +11,6 @@ for($i = 0; $i < count($tables); $i++) {
         echo "Changing password for {$user['username']}";
         break;
     }
-    
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];

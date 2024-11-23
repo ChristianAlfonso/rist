@@ -76,8 +76,10 @@ $grades_query = "SELECT g.*, s.last_name, s.first_name
                  WHERE g.teacher_id='$teacher_id' 
                    AND g.subject_id='$subject_id' 
                    AND g.quarter='$quarter' 
-                 ORDER BY s.last_name, s.first_name";
+                 ORDER BY s.last_name";
 $grades_result = mysqli_query($conn, $grades_query);
+$grades = mysqli_fetch_assoc($grades_result);
+
 ?>
 
 <!DOCTYPE html>
@@ -153,42 +155,22 @@ $grades_result = mysqli_query($conn, $grades_query);
                     <tr>
                         <th>LRN</th>
                         <th>Name</th>
-                        <?php
-                        // Fetch a row to check the scores structure
-                        $sample_row = mysqli_fetch_assoc($grades_result);
-                        if ($sample_row) {
-                            // Attempt to decode the scores and check if it's valid
-                            $sample_scores = json_decode($sample_row['scores'], true);
-                            if (is_array($sample_scores)) {
-                                foreach ($sample_scores as $key => $value) {
-                                    echo "<th>" . htmlspecialchars($key) . "</th>";
-                                }
-                            } else {
-                                // Handle invalid scores or empty case by skipping or using default column names
-                                echo "<th>No scores available</th>";
-                            }
-                        }
-                        ?>
+                        <th>Grades</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     // Reset pointer to the result set and display all grades
                     mysqli_data_seek($grades_result, 0);
+                    $arr = [];
                     while ($row = mysqli_fetch_assoc($grades_result)) {
                         // Attempt to decode the scores safely
-                        $scores = json_decode($row['scores'], true);
-                        if (!is_array($scores)) {
-                            // If decoding fails, set $scores to an empty array or default values
-                            $scores = ['No scores available'];
-                        }
-                        
+                      
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['student_lrn']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . "</td>";
-                        foreach ($scores as $score) {
-                            echo "<td>" . htmlspecialchars($score) . "</td>";
-                        }
+                        echo "<td>" . htmlspecialchars($row['scores']) . "</td>";
                         echo "</tr>";
                     }
                     ?>
