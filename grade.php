@@ -8,7 +8,7 @@ if (!isset($_SESSION['teacher_logged_in'])) {
     exit();
 }
 
-$teacher_id = $_SESSION['teacher_username'];
+$teacher_id = $_SESSION['teacher_id']; 
 $year = mysqli_real_escape_string($conn, $_GET['year']);
 $section = mysqli_real_escape_string($conn, $_GET['section']);
 $subject_name = mysqli_real_escape_string($conn, $_GET['subject']);

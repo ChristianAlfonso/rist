@@ -16,6 +16,7 @@ $query->execute();
 $result = $query->get_result();
 $teacher = $result->fetch_assoc();
 $teacher_id = $teacher['id']; // Get the teacher's ID
+$_SESSION['teacher_id'] = $teacher_id; // Save the teacher's ID in the session
 
 // Handle form submission for adding a subject/section
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

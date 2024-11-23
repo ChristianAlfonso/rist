@@ -225,7 +225,7 @@ $subjects_result = $subjects_query->get_result();
 
                 <div class="container-fluid shadow p-5 mt-3">
                     <!-- Added Subjects and Sections -->
-                    <h2>Your Added Subjects and Sections</h2>
+                    <h2>Subjects and Sections</h2>
                     <?php if ($subjects_result->num_rows > 0): ?>
                         <table class="table table-striped table-bordered nowrap" id="example">
                         <thead>
