@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="form-group mt-3 text-center">
-                        <a href="" class="text-dark">Forgot your password?</a>
+                        <a href="forget_password_view.php" class="text-dark">Forgot your password?</a>
                     </div>
     
                 </form>
