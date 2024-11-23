@@ -208,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
 
-        <div class="container shadow p-4">
+        <div class="container-fluid shadow p-4">
             <form method="POST" action="register_teacher.php">
 
                     <div class="form-group">

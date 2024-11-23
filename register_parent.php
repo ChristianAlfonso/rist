@@ -219,7 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
             </div>
 
-            <div class="container shadow p-4">
+            <div class="container-fluid shadow p-4">
                 <form method="POST" action="register_parent.php">
                     <label for="lrn_students">Student LRN:</label>
                     <input type="text" name="lrn_students" class="form-control" required>
