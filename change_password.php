@@ -42,35 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Error: " . mysqli_error($conn);
             }
         } else {
-            echo "<script>alert('Current password is incorrect.');</script>";
+            echo "<script>alert('Current password is incorrect.'); window.location='" . (isset($_SESSION['student_logged_in']) ? "student_dashboard.php" : (isset($_SESSION['parent_logged_in']) ? "parent_dashboard.php" : "teacher_dashboard.php")) . "'</script>";
         }
     } else {
-        echo "<script>alert('New passwords do not match.');</script>";
+        echo "<script>alert('New passwords do not match.');; window.location='" . (isset($_SESSION['student_logged_in']) ? "student_dashboard.php" : (isset($_SESSION['parent_logged_in']) ? "parent_dashboard.php" : "teacher_dashboard.php")) . "'</script>";
     }
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change Password</title>
-</head>
-<body>
-    <h2>Change Password</h2>
-    <form method="POST" action="change_password.php">
-        <label for="current_password">Current Password:</label><br>
-        <input type="password" name="current_password" required><br>
-
-        <label for="new_password">New Password:</label><br>
-        <input type="password" name="new_password" required><br>
-
-        <label for="confirm_password">Confirm New Password:</label><br>
-        <input type="password" name="confirm_password" required><br><br>
-
-        <button type="submit">Change Password</button>
-    </form>
-    <a href="<?php echo (isset($_SESSION['student_logged_in']) ? "student_dashboard.php" : (isset($_SESSION['parent_logged_in']) ? "parent_dashboard.php" : "teacher_dashboard.php")); ?>">Cancel</a>
-</body>
-</html>

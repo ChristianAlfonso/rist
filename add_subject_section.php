@@ -48,44 +48,70 @@ $subjects_result = $subjects_query->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
     <title>Add Subject/Section</title>
+    <style>
+        body {
+            background: url('images/bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            backdrop-filter: blur(10px);
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Add Subject/Section</h1>
 
-    <form method="POST" action="">
-        <label for="subject_name">Subject Name:</label>
-        <input type="text" id="subject_name" name="subject_name" required>
-        
-        <label for="year_level">Year Level:</label>
-        <input type="text" id="year_level" name="year_level" required>
-        
-        <label for="section">Section:</label>
-        <input type="text" id="section" name="section" required>
-        
-        <button type="submit">Add Subject/Section</button>
-    </form>
+<div class="add-subject-section vh-100 d-flex justify-content-center align-items-center">
+    <div class="container mt-5 p-5 shadow">
+        <h1>Add Subject/Section</h1>
+            <form method="POST" action="" class="p-3">
 
-    <h2>Your Added Subjects and Sections</h2>
-    <?php if ($subjects_result->num_rows > 0): ?>
-        <ul>
-            <?php while ($subject = $subjects_result->fetch_assoc()): ?>
-                <li>
-                    <?php echo htmlspecialchars($subject['year_level']) . " " . htmlspecialchars($subject['section']) . ": " . htmlspecialchars($subject['subject_name']); ?> 
-                    <a href="?delete_id=<?php echo urlencode($subject['id']); ?>" onclick="return confirm('Are you sure you want to delete this subject/section?');">Delete</a>
-                </li>
-            <?php endwhile; ?>
-        </ul>
-    <?php else: ?>
-        <p>No subjects added yet.</p>
-    <?php endif; ?>
+                <div class="form-group">
+                    <label for="subject_name">Subject Name:</label>
+                    <input class="form-control" type="text" id="subject_name" name="subject_name" required>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="year_level">Year Level:</label>
+                    <input class="form-control" type="text" id="year_level" name="year_level" required>
+                </div>
 
-    <h3>Actions</h3>
-    <ul>
-        <li><a href="teacher_dashboard.php">Back to Dashboard</a></li>
-        <li><a href="change_password.php">Change Password</a></li>
-        <li><a href="logout.php">Logout</a></li>
-    </ul>
+                <div class="form-group">
+                    <label for="section">Section:</label>
+                    <input class="form-control" type="text" id="section" name="section" required>
+                </div>
+
+                <div class="form-group d-flex mt-3" style="gap: 5px; flex-wrap: wrap;">
+                    <a class="btn btn-dark "href="teacher_dashboard.php">Back to Dashboard</a>
+                    <button class="btn btn-danger" type="submit">Add Subject/Section</button>
+                </div>
+
+            </form>
+
+   
+
+    </div>
+</div>
+
+   
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        // Auto close offcanvas when screen size changes
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 700) {
+                var offcanvasElement = document.getElementById('offcanvasSidebar');
+                var offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                if (offcanvasInstance) {
+                    offcanvasInstance.hide();
+                }
+            }
+        });
+    </script>
 </body>
 </html>

@@ -96,12 +96,34 @@ $selected_month = isset($_GET['month']) ? mysqli_real_escape_string($conn, $_GET
 <head>
     <meta charset="UTF-8">
     <title>Attendance Upload</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">    
     <style>
         @media print {
             body * { visibility: hidden; }
             #printableTable, #printableTable * { visibility: visible; }
             #printableTable { position: absolute; top: 0; left: 0; width: 100%; }
+        }
+        .blurred-background {
+            background: url('images/bg.jpg') no-repeat center center;
+            background-size: cover;
+            filter: blur(8px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .container {
+            background-color: white;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-equal {
+            width: 180px;
         }
     </style>
     <script>
@@ -124,28 +146,33 @@ $selected_month = isset($_GET['month']) ? mysqli_real_escape_string($conn, $_GET
     </script>
 </head>
 <body>
-    <h1>Upload Attendance for <?php echo htmlspecialchars($subject_name); ?> (Year: <?php echo $year; ?>, Section: <?php echo $section; ?>)</h1>
+    <div class="blurred-background"></div>
+    <div class="container shadow mt-5 p-5">
+    <h2>Upload Attendance for <?php echo htmlspecialchars($subject_name); ?> (Year: <?php echo $year; ?>, Section: <?php echo $section; ?>)</h2>
 
     <form action="" method="post" enctype="multipart/form-data">
-        <input type="file" name="csv_file" accept=".csv" required>
-        <button type="submit">Upload Attendance</button>
+        <input class="form-control" type="file" name="csv_file" accept=".csv" required>
+
+        <div class="form-group mt-3">
+            <a class="btn btn-dark" href="teacher_dashboard.php">Back to Dashboard</a>
+            <button class="btn btn-danger btn-equal" type="submit">Upload Attendance</button>
+        </div>
     </form>
 
-    <h2>Available Months</h2>
-    <div>
+    <h2 class="mt-3">Available Months</h2>
+    <div class="container">
         <?php foreach ($months as $month) { ?>
             <a href="?year=<?php echo $year; ?>&section=<?php echo $section; ?>&subject=<?php echo $subject_name; ?>&month=<?php echo $month; ?>" class="month-link">
                 <?php echo date('F Y', strtotime($month . '-01')); ?>
             </a>
             <?php if ($month !== end($months)) echo " | "; ?>
         <?php } ?>
-    </div>
+    </div> <br>
 
     <h2>Imported Attendance Records</h2>
-    <button onclick="printReport()">Print Attendance Report</button>
-
+    <button class="btn btn-danger" onclick="printReport()">Print Attendance Report</button>
     <div id="printableTable">
-        <table>
+        <table class="table mt-3">
             <thead>
                 <tr>
                     <th>LRN</th>
@@ -215,5 +242,38 @@ $selected_month = isset($_GET['month']) ? mysqli_real_escape_string($conn, $_GET
             </tbody>
         </table>
     </div>
+    </div>
+   
+  
+
+    
+
+
+   
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
+
+    <script>
+        new DataTable('#example', {
+            responsive: true
+        });
+
+        // Auto close offcanvas when screen size changes
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 700) {
+                var offcanvasElement = document.getElementById('demo');
+                var offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                if (offcanvasInstance) {
+                    offcanvasInstance.hide();
+                }
+            }
+        });
+    </script>
 </body>
 </html>

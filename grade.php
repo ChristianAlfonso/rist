@@ -85,77 +85,138 @@ $grades_result = mysqli_query($conn, $grades_query);
 <head>
     <meta charset="UTF-8">
     <title>Upload Grades for <?php echo htmlspecialchars($subject_name); ?> (Year: <?php echo $year; ?>, Section: <?php echo $section; ?>, Quarter: <?php echo $quarter; ?>)</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <style>
+        .blurred-background {
+            background: url('images/bg.jpg') no-repeat center center;
+            background-size: cover;
+            filter: blur(8px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            background-color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-equal {
+            width: 180px;
+        }
+    </style>
 </head>
+
 <body>
+    <div class="blurred-background"></div>
+    <div class="container shadow mt-3 p-5">
+        <h2>Upload or Update Grades for <?php echo htmlspecialchars($subject_name); ?> (Year: <?php echo $year; ?>, Section: <?php echo $section; ?>)</h2>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="quarter">Select Quarter:</label>
+                        <select class="form-control" name="quarter" id="quarter" required onchange="this.form.submit()">
+                            <option value="1st" <?php echo $quarter === '1st' ? 'selected' : ''; ?>>1st Quarter</option>
+                            <option value="2nd" <?php echo $quarter === '2nd' ? 'selected' : ''; ?>>2nd Quarter</option>
+                            <option value="3rd" <?php echo $quarter === '3rd' ? 'selected' : ''; ?>>3rd Quarter</option>
+                            <option value="4th" <?php echo $quarter === '4th' ? 'selected' : ''; ?>>4th Quarter</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="csv_file">Upload Grades (CSV):</label>
+                        <input class="form-control" type="file" name="csv_file" id="csv_file" accept=".csv" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <a class="btn btn-dark btn-equal" href="teacher_dashboard.php">Back to Dashboard</a>
+                <input class="btn btn-danger btn-equal" type="submit" value="Upload Grades">
+            </div>
+        </form>
 
-    <h1>Upload or Update Grades for <?php echo htmlspecialchars($subject_name); ?> (Year: <?php echo $year; ?>, Section: <?php echo $section; ?>)</h1>
-
-    <form action="" method="post" enctype="multipart/form-data">
-        <!-- Dropdown for selecting the quarter -->
-        <label for="quarter">Select Quarter:</label>
-        <select name="quarter" id="quarter" required onchange="this.form.submit()">
-            <option value="1st" <?php echo $quarter === '1st' ? 'selected' : ''; ?>>1st Quarter</option>
-            <option value="2nd" <?php echo $quarter === '2nd' ? 'selected' : ''; ?>>2nd Quarter</option>
-            <option value="3rd" <?php echo $quarter === '3rd' ? 'selected' : ''; ?>>3rd Quarter</option>
-            <option value="4th" <?php echo $quarter === '4th' ? 'selected' : ''; ?>>4th Quarter</option>
-        </select>
-        <br>
-
-        <label for="csv_file">Upload Grades (CSV):</label>
-        <input type="file" name="csv_file" id="csv_file" accept=".csv" required>
-        <br>
-
-        <input type="submit" value="Upload Grades">
-    </form>
-
-    <h2>Uploaded Grades for <?php echo $quarter; ?> Quarter</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>LRN</th>
-                <th>Name</th>
-                <?php
-                // Fetch a row to check the scores structure
-                $sample_row = mysqli_fetch_assoc($grades_result);
-                if ($sample_row) {
-                    // Attempt to decode the scores and check if it's valid
-                    $sample_scores = json_decode($sample_row['scores'], true);
-                    if (is_array($sample_scores)) {
-                        foreach ($sample_scores as $key => $value) {
-                            echo "<th>" . htmlspecialchars($key) . "</th>";
+        <h2 class="mt-5">Uploaded Grades for <?php echo $quarter; ?> Quarter</h2>
+        <div class="table-responsive">
+            <table class="table" id="example">
+                <thead>
+                    <tr>
+                        <th>LRN</th>
+                        <th>Name</th>
+                        <?php
+                        // Fetch a row to check the scores structure
+                        $sample_row = mysqli_fetch_assoc($grades_result);
+                        if ($sample_row) {
+                            // Attempt to decode the scores and check if it's valid
+                            $sample_scores = json_decode($sample_row['scores'], true);
+                            if (is_array($sample_scores)) {
+                                foreach ($sample_scores as $key => $value) {
+                                    echo "<th>" . htmlspecialchars($key) . "</th>";
+                                }
+                            } else {
+                                // Handle invalid scores or empty case by skipping or using default column names
+                                echo "<th>No scores available</th>";
+                            }
                         }
-                    } else {
-                        // Handle invalid scores or empty case by skipping or using default column names
-                        echo "<th>No scores available</th>";
+                        ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // Reset pointer to the result set and display all grades
+                    mysqli_data_seek($grades_result, 0);
+                    while ($row = mysqli_fetch_assoc($grades_result)) {
+                        // Attempt to decode the scores safely
+                        $scores = json_decode($row['scores'], true);
+                        if (!is_array($scores)) {
+                            // If decoding fails, set $scores to an empty array or default values
+                            $scores = ['No scores available'];
+                        }
+                        
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['student_lrn']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . "</td>";
+                        foreach ($scores as $score) {
+                            echo "<td>" . htmlspecialchars($score) . "</td>";
+                        }
+                        echo "</tr>";
                     }
-                }
-                ?>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            // Reset pointer to the result set and display all grades
-            mysqli_data_seek($grades_result, 0);
-            while ($row = mysqli_fetch_assoc($grades_result)) {
-                // Attempt to decode the scores safely
-                $scores = json_decode($row['scores'], true);
-                if (!is_array($scores)) {
-                    // If decoding fails, set $scores to an empty array or default values
-                    $scores = ['No scores available'];
-                }
-                
-                echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['student_lrn']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . "</td>";
-                foreach ($scores as $score) {
-                    echo "<td>" . htmlspecialchars($score) . "</td>";
-                }
-                echo "</tr>";
-            }
-            ?>
-        </tbody>
-    </table>
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
+
+    <script>
+        new DataTable('#example', {
+            responsive: true
+        });
+
+        // Auto close offcanvas when screen size changes
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 700) {
+                var offcanvasElement = document.getElementById('demo');
+                var offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                if (offcanvasInstance) {
+                    offcanvasInstance.hide();
+                }
+            }
+        });
+    </script>
 </body>
 </html>
