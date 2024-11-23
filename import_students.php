@@ -214,7 +214,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['student_file'])) {
                 </div>
         </div>
 
-        <div class="container shadow p-5">
+        <div class="container-fluid shadow p-5">
                 <form method="POST" enctype="multipart/form-data" action="import_students.php">
                     <label for="student_file">Upload CSV File:</label><br>
                     <input type="file" class="form-control" name="student_file" accept=".csv" required>
