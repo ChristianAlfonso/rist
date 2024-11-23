@@ -116,6 +116,8 @@ $grades_result = mysqli_query($conn, $grades_query);
 
 <body>
     <div class="blurred-background"></div>
+
+    <div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
     <div class="container shadow mt-3 p-5">
         <h2>Upload or Update Grades for <?php echo htmlspecialchars($subject_name); ?> (Year: <?php echo $year; ?>, Section: <?php echo $section; ?>)</h2>
         <form action="" method="post" enctype="multipart/form-data">
@@ -194,6 +196,8 @@ $grades_result = mysqli_query($conn, $grades_query);
             </table>
         </div>
     </div>
+    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
