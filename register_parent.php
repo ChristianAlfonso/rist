@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           VALUES ('$lrn_students', '$last_name', '$first_name', '$middle_initial', '$email', '$username', '$password')";
                 
                 if (mysqli_query($conn, $query)) {
-                    echo "<script>alert('Parent registered successfully!'); window.location='admin_dashboard.php';</script>";
+                    echo "<script>alert('Parent registered successfully!'); window.location='users_parents.php';</script>";
                 } else {
                     echo "Error: " . mysqli_error($conn);
                 }

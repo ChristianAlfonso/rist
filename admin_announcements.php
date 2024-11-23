@@ -64,10 +64,10 @@ if (isset($_GET['edit_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css">
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
-    
     <title>Admin Announcements</title>
     
 </head>
@@ -76,9 +76,9 @@ if (isset($_GET['edit_id'])) {
 
     .admin-announcement-page {
         height: 100vh;
+        
     }
 
-  
 
     .nav-item {
         width: 100%;
@@ -242,7 +242,7 @@ if (isset($_GET['edit_id'])) {
                         </div>
                 </div>
         </div>
-            <div class="container shadow  p-5">
+            <div class="container-fluid shadow  p-5">
                 <form method="POST" action="admin_announcements.php">
                         <input type="hidden" name="id" value="<?php echo isset($edit_announcement) ? $edit_announcement['id'] : ''; ?>">
                         
@@ -258,7 +258,7 @@ if (isset($_GET['edit_id'])) {
                             <option value="parents" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'parents') echo 'selected'; ?>>Parents</option>
                             <option value="teachers" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'teachers') echo 'selected'; ?>>Teachers</option>
                             <option value="all" <?php if (isset($edit_announcement) && $edit_announcement['audience'] == 'all') echo 'selected'; ?>>All</option>
-                        </select><br><br>
+                        </select> <br>
 
                         <button type="submit" class="btn btn-danger" name="<?php echo isset($edit_announcement) ? 'update_announcement' : 'add_announcement'; ?>">
                             <?php echo isset($edit_announcement) ? 'Update Announcement' : 'Post Announcement'; ?>
@@ -271,7 +271,7 @@ if (isset($_GET['edit_id'])) {
             </div>
         
 
-            <div class="container shadow p-3">
+            <div class="container-fluid shadow p-3">
 
                 <!-- List of announcements with Edit and Delete options -->
                 <?php
@@ -280,11 +280,11 @@ if (isset($_GET['edit_id'])) {
                 $result = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($result) > 0) {
-                    echo "<table class='table table-bordered table-stripped'>";
-                    echo "<tr class='bg-danger text-light'><th>Title</th><th>Content</th><th>Audience</th><th>Date Posted</th><th>Actions</th></tr>";
+                    echo "<table class='table table-bordered table-stripped' id='example'>";
+                    echo "<thead><tr class='bg-danger text-light'><th>Title</th><th>Content</th><th>Audience</th><th>Date Posted</th><th>Actions</th></tr></thead>";
 
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
+                        echo "<tbody><tr>";
                         echo "<td>" . $row['title'] . "</td>";
                         echo "<td>" . $row['content'] . "</td>";
                         echo "<td>" . $row['audience'] . "</td>";
@@ -293,7 +293,7 @@ if (isset($_GET['edit_id'])) {
                                 <a class='btn btn-dark' href='admin_announcements.php?edit_id=" . $row['id'] . "'>Edit</a>
                                 <a class='btn btn-danger' href='admin_announcements.php?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this announcement?\");'>Delete</a>
                             </td>";
-                        echo "</tr>";
+                        echo "</tr></tbody>";
                     }
 
                     echo "</table>";
@@ -308,11 +308,22 @@ if (isset($_GET['edit_id'])) {
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
 
-<script>
-          // Auto close offcanvas when screen size changes
-          window.addEventListener('resize', function() {
+  
+
+    <script>
+        new DataTable('#example', {
+                responsive: true
+            });
+
+        // Auto close offcanvas when screen size changes
+        window.addEventListener('resize', function() {
             if (window.innerWidth > 700) {
                 var offcanvasElement = document.getElementById('demo');
                 var offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);

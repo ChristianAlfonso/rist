@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </style>
 <body>
 
-<div class="admin-import-student vh-100 d-flex">
+<div class="admin-edit-student vh-100 d-flex">
     <div class="sidebar h-100 shadow p-3">
         <div class="sidebar-title d-flex align-items-center">
             <img src="images/logo.png" alt="">
