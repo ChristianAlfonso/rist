@@ -266,7 +266,10 @@ if (isset($_GET['edit_id'])) {
                 </form>
             </div>
 
-        <h2 class="mt-3">Manage Announcements</h2>
+            <div class="container-fluid">
+                <h2 class="mt-3">Manage Announcements</h2>
+            </div>
+        
 
             <div class="container shadow p-3">
 
@@ -287,7 +290,7 @@ if (isset($_GET['edit_id'])) {
                         echo "<td>" . $row['audience'] . "</td>";
                         echo "<td>" . $row['date_posted'] . "</td>";
                         echo "<td>
-                                <a class='btn btn-dark' href='admin_announcements.php?edit_id=" . $row['id'] . "'>Edit</a> |
+                                <a class='btn btn-dark' href='admin_announcements.php?edit_id=" . $row['id'] . "'>Edit</a>
                                 <a class='btn btn-danger' href='admin_announcements.php?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this announcement?\");'>Delete</a>
                             </td>";
                         echo "</tr>";

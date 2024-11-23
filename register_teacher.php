@@ -43,46 +43,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <style>
-.admin-register-teacher {
-        height: 100vh;
-        width: 100vw;
-    }
-    .nav-item {
-        width: 100%;
-        padding: 10px;
-    }
+    .admin-register-teacher {
+            height: 100vh;
+            width: 100vw;
+        }
+        .nav-item {
+            width: 100%;
+            padding: 10px;
+        }
 
-    .nav-item:hover{
-        background-color: #f6ded7;
-    }
-    .nav-item a {
-        text-decoration: none;
-        color: #982718;
-        font-weight: bold;
-    }
-    
+        .nav-item:hover{
+            background-color: #f6ded7;
+        }
+        .nav-item a {
+            text-decoration: none;
+            color: #982718;
+            font-weight: bold;
+        }
+        
 
-    img {
-        width: 50px;
-    }
+        img {
+            width: 50px;
+        }
 
-    .sidebar {
-        width: 300px;
-    }
-
-    .burger {
-        display: none;
-    }
-    
-    @media (max-width: 700px) {
         .sidebar {
-            display: none;
+            width: 300px;
         }
 
         .burger {
-            display: block;
+            display: none;
         }
-    }
+        
+        @media (max-width: 700px) {
+            .sidebar {
+                display: none;
+            }
+
+            .burger {
+                display: block;
+            }
+        }
 </style>
 <body>
 
@@ -209,55 +209,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
         <div class="container shadow p-4">
-        <form method="POST" action="register_teacher.php">
+            <form method="POST" action="register_teacher.php">
 
-                <div class="form-group">
-                    <label for="id">Teacher ID:</label>
-                    <input type="text" name="id" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="subject">Subject:</label>
-                    <input type="text" name="subject" class="form-control" required>
-                </div>
-
-                <div class="d-flex" style="gap: 5px">
-
-                    <div class="form-group" style="flex: 1;">
-                        <label for="last_name">Last Name:</label>
-                        <input type="text" name="last_name" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group" style="flex: 1;">
-                        <label for="first_name">First Name:</label>
-                        <input type="text" name="first_name" class="form-control" required>
+                    <div class="form-group">
+                        <label for="id">Teacher ID:</label>
+                        <input type="text" name="id" class="form-control" required>
                     </div>
 
-                    <div class="form-group" style="flex: 1;">
-                        <label for="middle_initial">Middle Initial:</label>
-                        <input type="text" name="middle_initial" class="form-control" required>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" name="subject" class="form-control" required>
                     </div>
 
-                </div>
+                    <div class="d-flex" style="gap: 5px">
 
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" class="form-control" required>
-                </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" name="last_name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group" style="flex: 1;">
+                            <label for="first_name">First Name:</label>
+                            <input type="text" name="first_name" class="form-control" required>
+                        </div>
 
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" class="form-control" required>
-                </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="middle_initial">Middle Initial:</label>
+                            <input type="text" name="middle_initial" class="form-control" required>
+                        </div>
 
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
-                </div>
+                    </div>
 
-                <button type="submit" class="btn btn-danger mt-2">Register</button>
-    </form>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger mt-2">Register</button>
+            </form>
         </div>
+        
     </div>
         
     </div>

@@ -90,11 +90,25 @@
 }
 
 .login-page {
-  background: url(images/backgroundwebsite.jpg);
+  background: url(images/bg.jpg);
   background-size: cover;
   background-position: center;
+  position: relative; /* Add relative positioning */
+}
+.login-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit; /* Inherit the background image */
+  filter: blur(10px); /* Add blur effect */
+  z-index: 0; /* Place it behind the form */
 }
 .login-page .form {
+  position: relative; /* Ensure form is above the blurred background */
+  z-index: 1; /* Place it above the blurred background */
   width: 600px;
   height: 500px;
   background-color: white;
