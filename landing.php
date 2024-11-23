@@ -116,13 +116,13 @@
     </section>
 
     <section class="about-section p-5" id="about">
-        <div class="display-3 mt-5 text-danger">
+        <div class="display-3 mt-5 text-light">
             Get to Know Us
         </div> 
 
         <div class="about-content">
             <!-- Carousel -->
-            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+            <div id="demo" class="carousel slide shadow" data-bs-ride="carousel">
 
                 <!-- Indicators/dots -->
                 <div class="carousel-indicators">
