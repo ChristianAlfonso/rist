@@ -47,7 +47,7 @@ $year_levels_result = mysqli_query($conn, $year_levels_query);
     <p><strong>Email:</strong> <?php echo htmlspecialchars($student['email']); ?></p>
     <p><strong>Year Level:</strong> <?php echo htmlspecialchars($student['year']); ?></p>
     <p><strong>Section:</strong> <?php echo htmlspecialchars($student['section']); ?></p>
-<!--  <p><strong>School Year:</strong> <?php echo htmlspecialchars($school_year); ?></p>  Added school_year here -->
+    <p><strong>School Year:</strong> <?php echo htmlspecialchars($school_year); ?></p>  
     <h2>Your Year Levels</h2>
     
     <?php if (mysqli_num_rows($year_levels_result) > 0): ?>

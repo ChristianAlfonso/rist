@@ -93,7 +93,7 @@ $grades = mysqli_fetch_assoc($grades_result);
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
     <style>
 
-          /*
+      
         @media print {
             body * {
                 visibility: hidden;
@@ -108,7 +108,7 @@ $grades = mysqli_fetch_assoc($grades_result);
                 width: 100%;
             }
         }
-            */
+            
         .blurred-background {
             background: url('images/bg.jpg') no-repeat center center;
             background-size: cover;
@@ -206,11 +206,11 @@ $grades = mysqli_fetch_assoc($grades_result);
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
 
     <script>
-          /*
+         
         function printReport() {
             window.print();
         }
-            */
+            
         new DataTable('#example', {
             responsive: true
         });

@@ -109,9 +109,11 @@ $subjects_result = $subjects_query->get_result();
                     <input class="form-control" type="text" id="section" name="section" required>
                 </div>
 
-                 <!--  add School Year Field -->
-        <label for="school_year">School Year:</label>
-        <input type="text" id="school_year" name="school_year" required>
+                        <!--  add School Year Field -->
+                <div class="form-group">
+                    <label for="school_year">School Year:</label>
+                    <input class="form-control" type="text" id="school_year" name="school_year" required>
+                </div>
         
                 <div class="form-group d-flex mt-3" style="gap: 5px; flex-wrap: wrap;">
                     <a class="btn btn-dark "href="teacher_dashboard.php">Back to Dashboard</a>
@@ -132,7 +134,9 @@ $subjects_result = $subjects_query->get_result();
                 <li>
                      <!--  add School Year -->
                     <?php echo htmlspecialchars($subject['year_level']) . " " . htmlspecialchars($subject['section']) . " (" . htmlspecialchars($subject['school_year']) . "): " . htmlspecialchars($subject['subject_name']); ?> 
+                    
                     <a href="?delete_id=<?php echo urlencode($subject['id']); ?>" onclick="return confirm('Are you sure you want to delete this subject/section?');">Delete</a>
+
                 </li>
             <?php endwhile; ?>
         </ul>

@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   VALUES ('$lrn', '$last_name', '$first_name', '$middle_initial', '$email', '$year', '$section', '$school_year', '$username', '$password')";
         
         if (mysqli_query($conn, $query)) {
-            echo "<script>alert('Student registered successfully!'); window.location='admin_dashboard.php';</script>";
+            echo "<script>alert('Student registered successfully!'); window.location='student_dashboard.php';</script>";
         } else {
             echo "Error: " . mysqli_error($conn);
         }
@@ -247,10 +247,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="section">Section:</label>
                 <input type="text" name="section" class="form-control" required>
 
-                 <!-- 
-    <label for="school_year">School Year (e.g., 2024-2025):</label><br>
-    <input type="text" name="school_year" required><br>
--->
+                    
+                <label for="school_year">School Year (e.g., 2024-2025):</label><br>
+                <input type="text" name="school_year" class="form-control" required>
+
                 <label for="username">Username:</label>
                 <input type="text" name="username" class="form-control" required>
 

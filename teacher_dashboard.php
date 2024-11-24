@@ -219,11 +219,12 @@ $subjects_result = $subjects_query->get_result();
                     <h2>Subjects and Sections</h2>
                     <?php if ($subjects_result->num_rows > 0): ?>
                         <table class="table table-striped table-bordered nowrap" id="example">
-                        <thead>
+                            <thead>
                                 <tr>
                                     <th>Year Level</th>
                                     <th>Section</th>
                                     <th>Subject Name</th>
+                                    <th>School Year</th> <!-- Added this line -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -233,7 +234,8 @@ $subjects_result = $subjects_query->get_result();
                                         <td><?php echo htmlspecialchars($subject['year_level']); ?></td>
                                         <td><?php echo htmlspecialchars($subject['section']); ?></td>
                                         <td><?php echo htmlspecialchars($subject['subject_name']); ?></td>
-                                        //     " (" . htmlspecialchars($subject['school_year']) . "): " .   <!-- Added  school year -->
+                                        <td><?php echo htmlspecialchars($subject['school_year']); ?></td>
+                                        
                                         <td>
                                             <a class="btn btn-dark" href="?delete_id=<?php echo urlencode($subject['id']); ?>" onclick="return confirm('Are you sure you want to delete this subject/section?');">Delete</a>
                                             <a class="btn btn-danger" href="view_subject_details.php?year=<?php echo urlencode($subject['year_level']); ?>&section=<?php echo urlencode($subject['section']); ?>&subject=<?php echo urlencode($subject['subject_name']); ?>">View</a>
