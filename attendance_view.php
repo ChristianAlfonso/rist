@@ -80,6 +80,7 @@ if ($subject_id) {
 <head>
     <meta charset="UTF-8">
     <title>Attendance Calendar View</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         .calendar {
             display: grid;
@@ -116,61 +117,90 @@ if ($subject_id) {
     <script>
         function printAttendanceReport() {
             // Show the printable report
-            var printSection = document.getElementById('attendance-report');
-            printSection.style.display = 'block';
+            var printSection = document.getElementById('attendance-report').innerHTML;
+            var originalContent = document.body.innerHTML;
+
+            // Hide all other content and show only the attendance report
+            document.body.innerHTML = printSection;
 
             // Trigger print dialog
             window.print();
 
-            // Hide the print section after printing
-            printSection.style.display = 'none';
+            // Restore the original content after printing
+            document.body.innerHTML = originalContent;
         }
     </script>
 </head>
 <body>
 
-    <div class="calendar-nav">
-        <a href="?subject=<?php echo htmlspecialchars($subject_name); ?>&month=<?php echo $month == 1 ? 12 : $month - 1; ?>&year=<?php echo $month == 1 ? $year - 1 : $year; ?>">&#8592; Previous Month</a>
-        <h3><?php echo date('F Y', strtotime("$year-$month-01")); ?></h3>
-        <a href="?subject=<?php echo htmlspecialchars($subject_name); ?>&month=<?php echo $month == 12 ? 1 : $month + 1; ?>&year=<?php echo $month == 12 ? $year + 1 : $year; ?>">Next Month &#8594;</a>
-    </div>
+   
+<div class="container p-5 d-flex justify-content-center align-items-center">
 
+   
+
+
+
+    <div class="container shadow p-5">
     <h3><?php echo htmlspecialchars($subject_name); ?> Attendance Records</h3>
-    <p><strong>Student Name:</strong> <?php echo htmlspecialchars($student_name); ?></p>
 
-    <p><strong>Total Present:</strong> <?php echo $total_present; ?></p>
-    <p><strong>Total Absent:</strong> <?php echo $total_absent; ?></p>
+        <div class="calendar-nav">
+            <a class="btn btn-dark shadow" href="?subject=<?php echo htmlspecialchars($subject_name); ?>&month=<?php echo $month == 1 ? 12 : $month - 1; ?>&year=<?php echo $month == 1 ? $year - 1 : $year; ?>">&#8592; Previous Month</a>
+            <h3><?php echo date('F Y', strtotime("$year-$month-01")); ?></h3>
+            <a class="btn btn-danger shadow" href="?subject=<?php echo htmlspecialchars($subject_name); ?>&month=<?php echo $month == 12 ? 1 : $month + 1; ?>&year=<?php echo $month == 12 ? $year + 1 : $year; ?>">Next Month &#8594;</a>
+        </div>
+        <div class="calendar shadow">
+            <?php
+            $daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            foreach ($daysOfWeek as $day) {
+                echo "<div class='day'><strong>$day</strong></div>";
+            }
 
-    <button onclick="printAttendanceReport()">Print Report</button>
+            $firstDayOfMonth = date('w', strtotime("$year-$month-01"));
+            for ($i = 0; $i < $firstDayOfMonth; $i++) {
+                echo "<div class='day'></div>"; // Empty days before the start of the month
+            }
 
-    <div class="calendar">
-        <?php
-        $daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        foreach ($daysOfWeek as $day) {
-            echo "<div class='day'><strong>$day</strong></div>";
-        }
+            for ($day = 1; $day <= $daysInMonth; $day++) {
+                $date = "$year-$month-" . str_pad($day, 2, '0', STR_PAD_LEFT);
+                $attendance_query = "SELECT status FROM attendance WHERE student_lrn='$student_lrn' AND subject_id='$subject_id' AND date='$date'";
+                $attendance_result = mysqli_query($conn, $attendance_query);
+                $attendance = mysqli_fetch_assoc($attendance_result);
 
-        $firstDayOfMonth = date('w', strtotime("$year-$month-01"));
-        for ($i = 0; $i < $firstDayOfMonth; $i++) {
-            echo "<div class='day'></div>"; // Empty days before the start of the month
-        }
+                $status_class = $attendance ? ($attendance['status'] === 'A' ? 'absent' : 'present') : '';
+                echo "<div class='day $status_class'>$day</div>";
+            }
+            ?>
+        </div>
+        <div class="calendar-content shadow mt-5">
+            <table class="table table-bordered">
+                <thead class="bg-danger text-light">
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Total Present</th>
+                        <th>Total Absent</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><?php echo htmlspecialchars($student_name); ?></td>
+                    <td><?php echo $total_present; ?></td>
+                    <td><?php echo $total_absent; ?></td>
+                </tr>
+            </table>
+        </div>
+        <div class="container-fluid d-flex justify-content-end" style="gap: 5px; flex-wrap: wrap;">
+            <a class="btn btn-dark shadow" href="parent_dashboard.php">Back to dashboard</a>
 
-        for ($day = 1; $day <= $daysInMonth; $day++) {
-            $date = "$year-$month-" . str_pad($day, 2, '0', STR_PAD_LEFT);
-            $attendance_query = "SELECT status FROM attendance WHERE student_lrn='$student_lrn' AND subject_id='$subject_id' AND date='$date'";
-            $attendance_result = mysqli_query($conn, $attendance_query);
-            $attendance = mysqli_fetch_assoc($attendance_result);
+            <button class="btn btn-danger shadow" onclick="printAttendanceReport()">Print Report</button>
+        </div>
 
-            $status_class = $attendance ? ($attendance['status'] === 'A' ? 'absent' : 'present') : '';
-            echo "<div class='day $status_class'>$day</div>";
-        }
-        ?>
+
     </div>
+    
 
     <!-- Print-friendly attendance report (hidden on page) -->
     <div id="attendance-report" class="attendance-report" style="display:none;">
-        <h3>Printable Attendance Report for <?php echo date('F Y', strtotime("$year-$month-01")); ?></h3>
-        <table border="1" cellpadding="10" cellspacing="0">
+        <h3 class="text-center"> Attendance Report for <?php echo date('F Y', strtotime("$year-$month-01")); ?></h3>
+        <table class="table mt-5" cellpadding="10" cellspacing="0">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -195,6 +225,8 @@ if ($subject_id) {
                 ?>
             </tbody>
         </table>
+    </div>
+
     </div>
 
 </body>
