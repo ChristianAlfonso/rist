@@ -82,6 +82,13 @@ if ($subject_id) {
     <title>Attendance Calendar View</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
+        .attendance-view {
+            background: url(images/bg.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
         .calendar {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -131,7 +138,8 @@ if ($subject_id) {
         }
     </script>
 </head>
-<body>
+
+<body class="attendance-view">
 
    
 <div class="container p-5 d-flex justify-content-center align-items-center">
@@ -140,7 +148,7 @@ if ($subject_id) {
 
 
 
-    <div class="container shadow p-5">
+    <div class="container bg-light shadow p-5">
     <h3><?php echo htmlspecialchars($subject_name); ?> Attendance Records</h3>
 
         <div class="calendar-nav">
