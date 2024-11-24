@@ -119,7 +119,7 @@ $grades = mysqli_fetch_assoc($grades_result);
 <body>
     <div class="blurred-background"></div>
 
-    <div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+    <div class="container-fluid p-5 d-flex justify-content-center align-items-center">
     <div class="container shadow mt-3 p-5">
         <h2>Upload or Update Grades for <?php echo htmlspecialchars($subject_name); ?> (Year: <?php echo $year; ?>, Section: <?php echo $section; ?>)</h2>
         <form action="" method="post" enctype="multipart/form-data">
@@ -150,7 +150,7 @@ $grades = mysqli_fetch_assoc($grades_result);
 
         <h2 class="mt-5">Uploaded Grades for <?php echo $quarter; ?> Quarter</h2>
         <div class="table-responsive">
-            <table class="table" id="example">
+            <table class="table table-bordered table-striped" id="example">
                 <thead>
                     <tr>
                         <th>LRN</th>

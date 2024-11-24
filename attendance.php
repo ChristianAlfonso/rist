@@ -147,101 +147,103 @@ $selected_month = isset($_GET['month']) ? mysqli_real_escape_string($conn, $_GET
 </head>
 <body>
     <div class="blurred-background"></div>
-    <div class="container shadow mt-5 p-5">
-    <h2>Upload Attendance for <?php echo htmlspecialchars($subject_name); ?> (Year: <?php echo $year; ?>, Section: <?php echo $section; ?>)</h2>
+    <div class="container-fluid p-5 d-flex justify-content-center align-items-center">
+        <div class="container shadow mt-5 p-5">
+            <h2>Upload Attendance for <?php echo htmlspecialchars($subject_name); ?> (Year: <?php echo $year; ?>, Section: <?php echo $section; ?>)</h2>
 
-    <form action="" method="post" enctype="multipart/form-data">
-        <input class="form-control" type="file" name="csv_file" accept=".csv" required>
+            <form action="" method="post" enctype="multipart/form-data">
+                <input class="form-control" type="file" name="csv_file" accept=".csv" required>
 
-        <div class="form-group mt-3">
-            <a class="btn btn-dark" href="teacher_dashboard.php">Back to Dashboard</a>
-            <button class="btn btn-danger btn-equal" type="submit">Upload Attendance</button>
-        </div>
-    </form>
+                <div class="form-group mt-3">
+                    <a class="btn btn-dark" href="teacher_dashboard.php">Back to Dashboard</a>
+                    <button class="btn btn-danger btn-equal" type="submit">Upload Attendance</button>
+                </div>
+            </form>
 
-    <h2 class="mt-3">Available Months</h2>
-    <div class="container">
-        <?php foreach ($months as $month) { ?>
-            <a href="?year=<?php echo $year; ?>&section=<?php echo $section; ?>&subject=<?php echo $subject_name; ?>&month=<?php echo $month; ?>" class="month-link">
-                <?php echo date('F Y', strtotime($month . '-01')); ?>
-            </a>
-            <?php if ($month !== end($months)) echo " | "; ?>
-        <?php } ?>
-    </div> <br>
+            <h2 class="mt-3">Available Months</h2>
+            <div class="container">
+                <?php foreach ($months as $month) { ?>
+                    <a href="?year=<?php echo $year; ?>&section=<?php echo $section; ?>&subject=<?php echo $subject_name; ?>&month=<?php echo $month; ?>" class="month-link">
+                        <?php echo date('F Y', strtotime($month . '-01')); ?>
+                    </a>
+                    <?php if ($month !== end($months)) echo " | "; ?>
+                <?php } ?>
+            </div> <br>
 
-    <h2>Imported Attendance Records</h2>
-    <button class="btn btn-danger" onclick="printReport()">Print Attendance Report</button>
-    <div id="printableTable">
-        <table class="table mt-3">
-            <thead>
-                <tr>
-                    <th>LRN</th>
-                    <th>Name</th>
-                    <?php
-                    // Get the attendance dates for the selected month
-                    $date_query = "SELECT DISTINCT date FROM attendance WHERE subject_id='$subject_id' AND teacher_id='$teacher_id' AND DATE_FORMAT(date, '%Y-%m')='$selected_month' ORDER BY date ASC";
-                    $date_result = mysqli_query($conn, $date_query);
-                    $dates = [];
+            <h2>Imported Attendance Records</h2>
+            <button class="btn btn-danger" onclick="printReport()">Print Attendance Report</button>
+            <div id="printableTable">
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th>LRN</th>
+                            <th>Name</th>
+                            <?php
+                            // Get the attendance dates for the selected month
+                            $date_query = "SELECT DISTINCT date FROM attendance WHERE subject_id='$subject_id' AND teacher_id='$teacher_id' AND DATE_FORMAT(date, '%Y-%m')='$selected_month' ORDER BY date ASC";
+                            $date_result = mysqli_query($conn, $date_query);
+                            $dates = [];
 
-                    while ($date_row = mysqli_fetch_assoc($date_result)) {
-                        $date = $date_row['date'];
-                        $dates[] = $date;
-                        echo "<th>" . htmlspecialchars(date('m/d/Y', strtotime($date))) . " ";
-                        echo "<button onclick=\"editDate('$date')\">Edit</button>";
-                        echo " <button onclick=\"deleteDate('$date')\">Delete</button>";
-                        echo "</th>";
-                    }
-                    ?>
-                    <th>Present Total</th>
-                    <th>Absent Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $student_query = "SELECT s.lrn, s.first_name, s.last_name FROM students s
-                                  JOIN attendance a ON s.lrn = a.student_lrn
-                                  WHERE a.subject_id='$subject_id' AND a.teacher_id='$teacher_id' AND DATE_FORMAT(a.date, '%Y-%m')='$selected_month'
-                                  GROUP BY s.lrn ORDER BY s.last_name ASC";
-                $student_result = mysqli_query($conn, $student_query);
+                            while ($date_row = mysqli_fetch_assoc($date_result)) {
+                                $date = $date_row['date'];
+                                $dates[] = $date;
+                                echo "<th>" . htmlspecialchars(date('m/d/Y', strtotime($date))) . " ";
+                                echo "<button onclick=\"editDate('$date')\">Edit</button>";
+                                echo " <button onclick=\"deleteDate('$date')\">Delete</button>";
+                                echo "</th>";
+                            }
+                            ?>
+                            <th>Present Total</th>
+                            <th>Absent Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $student_query = "SELECT s.lrn, s.first_name, s.last_name FROM students s
+                                        JOIN attendance a ON s.lrn = a.student_lrn
+                                        WHERE a.subject_id='$subject_id' AND a.teacher_id='$teacher_id' AND DATE_FORMAT(a.date, '%Y-%m')='$selected_month'
+                                        GROUP BY s.lrn ORDER BY s.last_name ASC";
+                        $student_result = mysqli_query($conn, $student_query);
 
-                $total_present = 0;
-                $total_absent = 0;
+                        $total_present = 0;
+                        $total_absent = 0;
 
-                while ($student = mysqli_fetch_assoc($student_result)) {
-                    echo "<tr>";
-                    echo "<td>" . htmlspecialchars($student['lrn']) . "</td>";
-                    echo "<td>" . htmlspecialchars($student['first_name'] . ' ' . $student['last_name']) . "</td>";
+                        while ($student = mysqli_fetch_assoc($student_result)) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($student['lrn']) . "</td>";
+                            echo "<td>" . htmlspecialchars($student['first_name'] . ' ' . $student['last_name']) . "</td>";
 
-                    $present_count = 0;
-                    $absent_count = 0;
+                            $present_count = 0;
+                            $absent_count = 0;
 
-                    foreach ($dates as $date) {
-                        $attendance_query = "SELECT status FROM attendance WHERE student_lrn='{$student['lrn']}' AND subject_id='$subject_id' AND date='$date'";
-                        $attendance_result = mysqli_query($conn, $attendance_query);
-                        $attendance = mysqli_fetch_assoc($attendance_result);
-                        $status = $attendance ? $attendance['status'] : '';
+                            foreach ($dates as $date) {
+                                $attendance_query = "SELECT status FROM attendance WHERE student_lrn='{$student['lrn']}' AND subject_id='$subject_id' AND date='$date'";
+                                $attendance_result = mysqli_query($conn, $attendance_query);
+                                $attendance = mysqli_fetch_assoc($attendance_result);
+                                $status = $attendance ? $attendance['status'] : '';
 
-                        if ($status === 'A') {
-                            echo "<td>A</td>";
-                            $absent_count++;
-                        } else {
-                            echo "<td></td>";
-                            $present_count++;
+                                if ($status === 'A') {
+                                    echo "<td>A</td>";
+                                    $absent_count++;
+                                } else {
+                                    echo "<td></td>";
+                                    $present_count++;
+                                }
+                            }
+
+                            echo "<td>$present_count</td>";
+                            echo "<td>$absent_count</td>";
+                            echo "</tr>";
+
+                        
                         }
-                    }
+                        ?>
 
-                    echo "<td>$present_count</td>";
-                    echo "<td>$absent_count</td>";
-                    echo "</tr>";
-
-                  
-                }
-                ?>
-
-           
-            </tbody>
-        </table>
-    </div>
+                
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
    
   
