@@ -2,13 +2,13 @@
 session_start();
 include('db.php');
 
-// Check if the student is logged in
+
 if (!isset($_SESSION['student_logged_in'])) {
     header("Location: login.php");
     exit();
 }
 
-// Fetch student details
+
 $username = $_SESSION['student_username'];
 $query = $conn->prepare("SELECT * FROM students WHERE username = ?");
 $query->bind_param("s", $username);
@@ -20,13 +20,14 @@ if ($student) {
     $lrn = $student['lrn'];
     $year = $student['year'];
     $section = $student['section'];
+    $school_year = $student['school_year'];  // add school_year 
 } else {
     echo "Student not found.";
     exit();
 }
 
-// Fetch all available year levels from the database
-$year_levels_query = "SELECT DISTINCT year_level FROM subjects_sections ORDER BY year_level ASC";
+// add school_year 
+$year_levels_query = "SELECT DISTINCT year_level, school_year FROM subjects_sections ORDER BY year_level ASC";
 $year_levels_result = mysqli_query($conn, $year_levels_query);
 ?>
 <!DOCTYPE html>
@@ -46,7 +47,7 @@ $year_levels_result = mysqli_query($conn, $year_levels_query);
     <p><strong>Email:</strong> <?php echo htmlspecialchars($student['email']); ?></p>
     <p><strong>Year Level:</strong> <?php echo htmlspecialchars($student['year']); ?></p>
     <p><strong>Section:</strong> <?php echo htmlspecialchars($student['section']); ?></p>
-
+<!--  <p><strong>School Year:</strong> <?php echo htmlspecialchars($school_year); ?></p>  Added school_year here -->
     <h2>Your Year Levels</h2>
     
     <?php if (mysqli_num_rows($year_levels_result) > 0): ?>
@@ -57,6 +58,9 @@ $year_levels_result = mysqli_query($conn, $year_levels_query);
                         <?php echo "Year " . htmlspecialchars($year_level['year_level']); ?> View
                     </a>
                 </li>
+                 <!-- <a href="subjects_view.php?year_level=<?php echo urlencode($year_level['year_level']); ?>&school_year=<?php echo urlencode($year_level['school_year']); ?>">
+                 <?php echo "Year " . htmlspecialchars($year_level['year_level']) . " (" . htmlspecialchars($year_level['school_year']) . ")"; ?> View  
+                    </a> -->
             <?php endwhile; ?>
         </ul>
     <?php else: ?>

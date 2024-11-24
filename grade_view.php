@@ -49,6 +49,23 @@ $grades_result = mysqli_query($conn, $grades_query);
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
 <style>
+     /*
+        @media print {  
+
+            body * {
+                visibility: hidden;
+            }
+            #printable-area, #printable-area * {
+                visibility: visible;
+            }
+            #printable-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
+            */
         .blurred-background {
             background: url('images/bg.jpg') no-repeat center center;
             background-size: cover;
@@ -151,6 +168,11 @@ $grades_result = mysqli_query($conn, $grades_query);
   
 
     <script>
+         /*
+        function printReport() {
+            window.print();
+        }
+            */
         new DataTable('#example', {
                 responsive: true
             });

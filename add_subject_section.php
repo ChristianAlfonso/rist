@@ -18,16 +18,34 @@ $teacher = $result->fetch_assoc();
 $teacher_id = $teacher['id']; // Get the teacher's ID
 $_SESSION['teacher_id'] = $teacher_id; // Save the teacher's ID in the session
 
-// Handle form submission for adding a subject/section
+// add 
+$error_message = "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subject_name = $_POST['subject_name'];
     $year_level = $_POST['year_level'];
     $section = $_POST['section'];
+    $school_year = $_POST['school_year']; 
+// end
 
-    $insert_query = $conn->prepare("INSERT INTO subjects_sections (subject_name, year_level, section, teacher_id) VALUES (?, ?, ?, ?)");
-    $insert_query->bind_param("ssss", $subject_name, $year_level, $section, $teacher_id);
-    $insert_query->execute();
+//  add school year and error message
+    $check_query = $conn->prepare("SELECT * FROM subjects_sections WHERE subject_name = ? AND year_level = ? AND section = ? AND school_year = ?");
+    $check_query->bind_param("ssss", $subject_name, $year_level, $section, $school_year);
+    $check_query->execute();
+    $existing = $check_query->get_result();
+
+    if ($existing->num_rows > 0) {
+        $error_message = "The combination of Subject, Year Level, Section, and School Year already exists!";
+    } else {
+   //     
+        // add If no duplicate exists, proceed with the insertion
+        $insert_query = $conn->prepare("INSERT INTO subjects_sections (subject_name, year_level, section, school_year, teacher_id) VALUES (?, ?, ?, ?, ?)");
+        $insert_query->bind_param("sssss", $subject_name, $year_level, $section, $school_year, $teacher_id);
+        $insert_query->execute();
+    }
 }
+// end
+
 
 // Handle deletion of a subject/section
 if (isset($_GET['delete_id'])) {
@@ -37,12 +55,12 @@ if (isset($_GET['delete_id'])) {
     $delete_query->execute();
 }
 
-// Fetch subjects and sections added by this teacher
-$subjects_query = $conn->prepare("SELECT id, subject_name, year_level, section FROM subjects_sections WHERE teacher_id = ?");
+//  add school year
+$subjects_query = $conn->prepare("SELECT id, subject_name, year_level, section, school_year FROM subjects_sections WHERE teacher_id = ?");
 $subjects_query->bind_param("s", $teacher_id);
 $subjects_query->execute();
 $subjects_result = $subjects_query->get_result();
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +87,11 @@ $subjects_result = $subjects_query->get_result();
 <div class="add-subject-section vh-100 d-flex justify-content-center align-items-center">
     <div class="container mt-5 p-5 shadow">
         <h1>Add Subject/Section</h1>
+          <!-- add error mess -->
+    <?php if (!empty($error_message)): ?>
+        <div style="color: red;"><?php echo $error_message; ?></div>
+    <?php endif; ?>
+
             <form method="POST" action="" class="p-3">
 
                 <div class="form-group">
@@ -86,6 +109,10 @@ $subjects_result = $subjects_query->get_result();
                     <input class="form-control" type="text" id="section" name="section" required>
                 </div>
 
+                 <!--  add School Year Field -->
+        <label for="school_year">School Year:</label>
+        <input type="text" id="school_year" name="school_year" required>
+        
                 <div class="form-group d-flex mt-3" style="gap: 5px; flex-wrap: wrap;">
                     <a class="btn btn-dark "href="teacher_dashboard.php">Back to Dashboard</a>
                     <button class="btn btn-danger" type="submit">Add Subject/Section</button>
@@ -97,8 +124,21 @@ $subjects_result = $subjects_query->get_result();
 
     </div>
 </div>
-
-   
+ <!--  add School Year -->
+<h2>Your Added Subjects and Sections</h2>
+    <?php if ($subjects_result->num_rows > 0): ?>
+        <ul>
+            <?php while ($subject = $subjects_result->fetch_assoc()): ?>
+                <li>
+                     <!--  add School Year -->
+                    <?php echo htmlspecialchars($subject['year_level']) . " " . htmlspecialchars($subject['section']) . " (" . htmlspecialchars($subject['school_year']) . "): " . htmlspecialchars($subject['subject_name']); ?> 
+                    <a href="?delete_id=<?php echo urlencode($subject['id']); ?>" onclick="return confirm('Are you sure you want to delete this subject/section?');">Delete</a>
+                </li>
+            <?php endwhile; ?>
+        </ul>
+    <?php else: ?>
+        <p>No subjects added yet.</p>
+    <?php endif; ?>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

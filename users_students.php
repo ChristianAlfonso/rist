@@ -213,6 +213,7 @@ $students_result = mysqli_query($conn, $students_query);
                             <th>Email</th>
                             <th>Year</th>
                             <th>Section</th>
+                            <th>School Year</th> <!-- Added School Year Column -->
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -224,6 +225,7 @@ $students_result = mysqli_query($conn, $students_query);
                             <td><?php echo htmlspecialchars($row['email']); ?></td>
                             <td><?php echo htmlspecialchars($row['year']); ?></td>
                             <td><?php echo htmlspecialchars($row['section']); ?></td>
+                            <td><?php echo htmlspecialchars($row['school_year']); ?></td> <!-- add Display School Year -->
                             <td>
                                 <a class="btn btn-dark" href="edit_student.php?lrn=<?php echo urlencode($row['lrn']); ?>">Edit</a> 
                                 <a class="btn btn-danger" href="users_students.php?delete_lrn=<?php echo urlencode($row['lrn']); ?>" onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>

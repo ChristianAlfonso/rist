@@ -2,42 +2,33 @@
 session_start();
 include('db.php');
 
-// Check if the teacher is logged in
+
 if (!isset($_SESSION['teacher_logged_in'])) {
     header("Location: login.php");
     exit();
 }
 
-// Fetch the logged-in teacher's information
+
 $username = $_SESSION['teacher_username'];
 $query = $conn->prepare("SELECT id, subject, first_name, last_name, email FROM teachers WHERE username = ?");
 $query->bind_param("s", $username);
 $query->execute();
 $result = $query->get_result();
 $teacher = $result->fetch_assoc();
-$teacher_id = $teacher['id']; // Get the teacher's ID
+$teacher_id = $teacher['id']; 
 
-// Handle deletion of subjects/sections
-if (isset($_GET['delete_id'])) {
-    $delete_id = $_GET['delete_id'];
-    $delete_query = $conn->prepare("DELETE FROM subjects_sections WHERE id = ?");
-    $delete_query->bind_param("i", $delete_id);
-    $delete_query->execute();
-    header("Location: teacher_dashboard.php");
-    exit();
-}
 
-// Fetch announcements
 $announcement_query = $conn->prepare("SELECT * FROM announcements ORDER BY date_posted DESC");
 $announcement_query->execute();
 $announcements_result = $announcement_query->get_result();
 
-// Fetch subjects and sections added by this teacher
-$subjects_query = $conn->prepare("SELECT id, subject_name, year_level, section FROM subjects_sections WHERE teacher_id = ?");
+// add school year
+$subjects_query = $conn->prepare("SELECT subject_name, year_level, section, school_year FROM subjects_sections WHERE teacher_id = ?");
 $subjects_query->bind_param("s", $teacher_id);
 $subjects_query->execute();
 $subjects_result = $subjects_query->get_result();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -242,6 +233,7 @@ $subjects_result = $subjects_query->get_result();
                                         <td><?php echo htmlspecialchars($subject['year_level']); ?></td>
                                         <td><?php echo htmlspecialchars($subject['section']); ?></td>
                                         <td><?php echo htmlspecialchars($subject['subject_name']); ?></td>
+                                        //     " (" . htmlspecialchars($subject['school_year']) . "): " .   <!-- Added  school year -->
                                         <td>
                                             <a class="btn btn-dark" href="?delete_id=<?php echo urlencode($subject['id']); ?>" onclick="return confirm('Are you sure you want to delete this subject/section?');">Delete</a>
                                             <a class="btn btn-danger" href="view_subject_details.php?year=<?php echo urlencode($subject['year_level']); ?>&section=<?php echo urlencode($subject['section']); ?>&subject=<?php echo urlencode($subject['subject_name']); ?>">View</a>
