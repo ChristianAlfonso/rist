@@ -115,6 +115,30 @@
   border-radius: 10px;
 }
 
+.forgot-page {
+  background: url(images/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  position: relative; /* Add relative positioning */
+}
+.forgot-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit; /* Inherit the background image */
+  filter: blur(10px); /* Add blur effect */
+  z-index: 0; /* Place it behind the form */
+}
+.forgot-page .form {
+  position: relative; /* Ensure form is above the blurred background */
+  z-index: 1; /* Place it above the blurred background */
+  background-color: white;
+  border-radius: 10px;
+}
+
 /*
 .admin-page {
     .sidebar {
