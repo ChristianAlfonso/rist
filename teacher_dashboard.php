@@ -50,6 +50,7 @@ $subjects_result = $subjects_query->get_result();
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css">
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <title>Teacher Dashboard</title>
 </head>    
@@ -112,10 +113,13 @@ $subjects_result = $subjects_query->get_result();
                     <div class="offcanvas-body">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
-                                <a href="#information" data-bs-toggle="tab" class="nav-link active">Information</a>
+        \                        <a href="#information" data-bs-toggle="tab" class="nav-link active">Information</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#announcement" data-bs-toggle="tab" class="nav-link">Announcement</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#ranking" data-bs-toggle="tab" class="nav-link">Ranking</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#feedback" data-bs-toggle="tab" class="nav-link">Feedback</a>
@@ -135,8 +139,12 @@ $subjects_result = $subjects_query->get_result();
                         <a href="#announcement" data-bs-toggle="tab" class="nav-link">Announcement</a>
                     </li>
                     <li class="nav-item">
+                                <a href="#ranking" data-bs-toggle="tab" class="nav-link">Ranking</a>
+                            </li>
+                    <li class="nav-item">
                         <a href="#feedback" data-bs-toggle="tab" class="nav-link">Feedback</a>
                     </li>
+                    
                     <li class="nav-item">
                         <a href="login.php" class="nav-link">Logout</a>
                     </li>
@@ -175,7 +183,7 @@ $subjects_result = $subjects_query->get_result();
 
             <div class="tab-pane active container-fluid" id="information">
                 
-            <h1 class="mt-3">Welcome, <?php echo htmlspecialchars($teacher['first_name']); ?>!</h1>
+             <h1 class="mt-3">Welcome, <?php echo htmlspecialchars($teacher['first_name']); ?>!</h1>
 
 
                 <div class="container-fluid shadow mt-3 p-5">
@@ -246,7 +254,7 @@ $subjects_result = $subjects_query->get_result();
                                         <td><?php echo htmlspecialchars($subject['subject_name']); ?></td>
                                         <td><?php echo htmlspecialchars($subject['school_year']); ?></td> <!-- Added this line -->
                                         <td>
-                                            <a class="btn btn-dark" href="?delete_id=<?php echo urlencode($subject['id']); ?>" onclick="return confirm('Are you sure you want to delete this subject/section?');">Delete</a>
+                                            <a class="btn btn-dark" href="#" onclick="confirmDelete(<?php echo urlencode($subject['id']); ?>)">Delete</a>
                                             <a class="btn btn-danger" href="view_subject_details.php?year=<?php echo urlencode($subject['year_level']); ?>&section=<?php echo urlencode($subject['section']); ?>&subject=<?php echo urlencode($subject['subject_name']); ?>">View</a>
                                         </td>
                                     </tr>
@@ -264,6 +272,80 @@ $subjects_result = $subjects_query->get_result();
 
             </div>
 
+            <div class="tab-pane fade container-fluid" id="ranking">
+                <div class="container shadow p-5 mt-5">
+                    <h1>Ranking</h1>
+                    <form action="ranking.php" method="POST">
+                        
+                   
+                        <div class="form-group">
+                            <label>Subject:</label>
+                            <select class="form-control" name="subject" id="subject">
+                                <option value="" selected disabled>Select subject</option>
+                                <?php
+                                    $subjects_query = $conn->prepare("SELECT subject_name FROM subjects_sections WHERE teacher_id = ?");
+                                    $subjects_query->bind_param("s", $teacher_id);
+                                    $subjects_query->execute();
+                                    $subjects_result = $subjects_query->get_result();
+                                    while ($subject = $subjects_result->fetch_assoc()) {
+                                        echo "<option value='" . $subject['subject_name'] . "'>" . $subject['subject_name'] . "</option>";
+                                    }
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Grade Year:</label>
+                            <select class="form-control mt-2" name="year" id="year">
+                                <option value="" selected disabled>Select grade year</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quarter:</label>
+                            <select class="form-control mt-2" name="quarter" id="quarter">
+                                <option value="" selected disabled>Select quarter</option>
+                                <option value="1">1st Quarter</option>
+                                <option value="2">2nd Quarter</option>
+                                <option value="3">3rd Quarter</option>
+                                <option value="4">4th Quarter</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group d-flex justify-content-end">
+                          <button class="btn btn-danger mt-3 " type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="container shadow p-5 mt-5">
+                    <h1>Ranking Result</h1>
+                    <table class="table table-bordered table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Subject</th>
+                                <th>Grade Year</th>
+                                <th>Quarter</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+               
+            </div>
+
             <div class="tab-pane fade-container-fluid" id="feedback">
                   
                     <h3>Send Feedback</h3>
@@ -271,6 +353,7 @@ $subjects_result = $subjects_query->get_result();
                     <li><a href="feedback_submit.php">Send Feedback</a></li>
 
             </div>
+            
 
 
         </div>
@@ -305,6 +388,31 @@ $subjects_result = $subjects_query->get_result();
                 }
             }
         });
+        <?php if (isset($_SESSION['ranking_submitted'])): ?>
+        Swal.fire({
+            title: 'Success!',
+            text: 'Ranking submitted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+        <?php unset($_SESSION['ranking_submitted']); ?>
+    <?php endif; ?>
+
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "?delete_id=" + id;
+            }
+        });
+    }
     </script>
 </body>
 </html>
