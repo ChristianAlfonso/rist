@@ -23,7 +23,7 @@ $announcement_query->execute();
 $announcements_result = $announcement_query->get_result();
 
 // add school year
-$subjects_query = $conn->prepare("SELECT subject_name, year_level, section, school_year FROM subjects_sections WHERE teacher_id = ?");
+$subjects_query = $conn->prepare("SELECT id, subject_name, year_level, section, school_year FROM subjects_sections WHERE teacher_id = ?");
 $subjects_query->bind_param("s", $teacher_id);
 $subjects_query->execute();
 $subjects_result = $subjects_query->get_result();
