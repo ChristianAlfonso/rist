@@ -126,6 +126,9 @@ $year_levels_result = mysqli_query($conn, $year_levels_query);
                                 <a href="#feedback" data-bs-toggle="tab" class="nav-link">Feedback</a>
                             </li>
                             <li class="nav-item">
+                                <a href="view_ranking.php?year=<?php echo $year?>&section=<?php echo $section?>" class="nav-link">Your Ranking</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="login.php" class="nav-link">Logout</a>
                             </li>
                         </ul>
