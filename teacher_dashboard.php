@@ -18,16 +18,22 @@ $teacher = $result->fetch_assoc();
 $teacher_id = $teacher['id']; 
 
 
+// Handle deletion of subject/section
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+    $delete_query = $conn->prepare("DELETE FROM subjects_sections WHERE id = ?");
+    $delete_query->bind_param("i", $delete_id);
+    $delete_query->execute();
+    header("Location: teacher_dashboard.php");
+    exit();
+}
+
 $announcement_query = $conn->prepare("SELECT * FROM announcements ORDER BY date_posted DESC");
 $announcement_query->execute();
 $announcements_result = $announcement_query->get_result();
 
 // add school year
 $subjects_query = $conn->prepare("SELECT id, subject_name, year_level, section, school_year FROM subjects_sections WHERE teacher_id = ?");
-<<<<<<< HEAD
-=======
-
->>>>>>> 1a94270d70f8a70585d7d8c43a995d33abf5d2df
 $subjects_query->bind_param("s", $teacher_id);
 $subjects_query->execute();
 $subjects_result = $subjects_query->get_result();
