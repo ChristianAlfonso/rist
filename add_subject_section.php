@@ -42,6 +42,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $insert_query = $conn->prepare("INSERT INTO subjects_sections (subject_name, year_level, section, school_year, teacher_id) VALUES (?, ?, ?, ?, ?)");
         $insert_query->bind_param("sssss", $subject_name, $year_level, $section, $school_year, $teacher_id);
         $insert_query->execute();
+        echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Subject/Section added successfully!',
+                    });
+                });
+              </script>";
     }
 }
 // end
@@ -81,6 +90,7 @@ $subjects_result = $subjects_query->get_result();
             border-radius: 10px;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
