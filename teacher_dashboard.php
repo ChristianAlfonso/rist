@@ -120,7 +120,7 @@ $subjects_result = $subjects_query->get_result();
                                 <a href="#announcement" data-bs-toggle="tab" class="nav-link">Announcement</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#ranking" data-bs-toggle="tab" class="nav-link">Ranking</a>
+                                <a href="#ranking" data-bs-toggle="tab" class="nav-link">Student Ranking</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#feedback" data-bs-toggle="tab" class="nav-link">Feedback</a>
@@ -139,9 +139,7 @@ $subjects_result = $subjects_query->get_result();
                     <li class="nav-item">
                         <a href="#announcement" data-bs-toggle="tab" class="nav-link">Announcement</a>
                     </li>
-                    <li class="nav-item">
-                                <a href="#ranking" data-bs-toggle="tab" class="nav-link">Ranking</a>
-                            </li>
+                  
                     <li class="nav-item">
                         <a href="#feedback" data-bs-toggle="tab" class="nav-link">Feedback</a>
                     </li>
@@ -280,7 +278,38 @@ $subjects_result = $subjects_query->get_result();
                     <li><a href="feedback_submit.php">Send Feedback</a></li>
 
             </div>
-            
+                        <div class="tab-pane fade-container-fluid" id="ranking">
+ <h2>Subjects and Sections</h2>
+                    <?php if ($subjects_result->num_rows > 0): ?>
+                        <table class="table table-striped table-bordered nowrap" id="example">
+                            <thead>
+                                <tr>
+                                    <th>Year Level</th>
+                                    <th>Section</th>
+                                    <th>Subject Name</th>
+                                    <th>School Year</th> <!-- Added this line -->
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($subject = $subjects_result->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($subject['year_level']); ?></td>
+                                        <td><?php echo htmlspecialchars($subject['section']); ?></td>
+                                        <td><?php echo htmlspecialchars($subject['subject_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($subject['school_year']); ?></td> <!-- Added this line -->
+                                        <td>
+                                            <a class="btn btn-dark" href="#" onclick="confirmDelete(<?php echo urlencode($subject['id']); ?>)">Delete</a>
+                                            <a class="btn btn-danger" href="view_subject_details.php?year=<?php echo urlencode($subject['year_level']); ?>&section=<?php echo urlencode($subject['section']); ?>&subject=<?php echo urlencode($subject['subject_name']); ?>">View</a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <p>No subjects added yet.</p>
+                    <?php endif; ?>
+                        </div>
 
 
         </div>

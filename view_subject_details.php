@@ -58,6 +58,7 @@ $subject = $_GET['subject'] ?? '';
                 <a class="btn btn-success btn-equal" href="attendance.php?year=<?php echo urlencode($year); ?>&section=<?php echo urlencode($section); ?>&subject=<?php echo urlencode($subject); ?>">Attendance</a>
 
                 <a class="btn btn-danger btn-equal" href="grade.php?year=<?php echo urlencode($year); ?>&section=<?php echo urlencode($section); ?>&subject=<?php echo urlencode($subject); ?>">Grade</a>
+                <a class="btn btn-danger btn-equal" href="ranking.php?year=<?php echo urlencode($year); ?>&section=<?php echo urlencode($section); ?>&subject=<?php echo urlencode($subject); ?>">Student Rankings</a>
 
                 <a class="btn btn-dark btn-equal" href="teacher_dashboard.php">Back to Dashboard</a>
             </div>
