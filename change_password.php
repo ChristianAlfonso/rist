@@ -50,21 +50,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 " SET password='$new_password_hashed' WHERE username='$username'";
 
                 if (mysqli_query($conn, $update_query)) {
-                    echo "<script>alert('Password changed successfully!'); window.location='" . 
-                         (isset($_SESSION['student_logged_in']) ? "student_dashboard.php" : 
-                         (isset($_SESSION['parent_logged_in']) ? "parent_dashboard.php" : 
-                         (isset($_SESSION['teacher_logged_in']) ? "teacher_dashboard.php" : "admin_dashboard.php"))) . "';</script>";
+                    if(isset($_SESSION['admin_logged_in'])){
+                        header("Location:admin_announcements.php");
+                    }
+                    else if(isset($_SESSION['student_logged_in'])){
+                        header("Location:student_dashboard.php");
+                    }
+                    else if(isset($_SESSION['parent_logged_in'])){
+                        header("Location:parent_dashboard.php");
+                    }
+                    else if(isset($_SESSION['teacher_logged_in'])){
+                        header("Location:teacher_dashboard.php");
+                    }
                 } else {
                     echo "<script>alert('Error updating password.');</script>";
+                    header("Location:admin_announcements.php");
                 }
+
             } else {
                 echo "<script>alert('Current password is incorrect.');</script>";
+                header("Location:admin_announcements.php");
+                
             }
         } else {
             echo "<script>alert('User not found.');</script>";
+            header("Location:admin_announcements.php");
+            
         }
     } else {
         echo "<script>alert('New passwords do not match.');</script>";
+        header("Location:admin_announcements.php");
+        
     }
 }
 ?>

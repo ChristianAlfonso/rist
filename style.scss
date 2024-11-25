@@ -10,7 +10,6 @@
 }
 
 .landing-page {
-    min-width: 1200px;
 
     .navbar {
         .navbar-brand {
@@ -102,21 +101,24 @@
             justify-content: center;
             align-items: center;
 
-            .carousel {
+            .carousel-parent {
                 flex: 1;
 
-                .carousel-inner {
+                .carousel {
 
-                    
-                    .carousel-item {
-                        img {
-                            width: 900px;
-                            height: 60vh;
-                            aspect-ratio: 2/2;
+                    .carousel-inner {
+
+                        
+                        .carousel-item {
+                            img {
+                                width: 900px;
+                                height: 60vh;
+                                aspect-ratio: 2/2;
+                            }
                         }
                     }
                 }
-            }
+             }
 
             .about-text {
                 flex: 1;
@@ -130,6 +132,19 @@
  
     
 }
+
+@media (max-width: 1230px) {
+    .navbar-brand-text, .normal-nav {
+        display: none;
+    }
+
+    .about-content {
+        flex-direction: column;
+    }
+}
+
+
+
 
 .login-page {
     background: url(images/bg.jpg);

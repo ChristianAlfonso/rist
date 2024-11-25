@@ -14,16 +14,45 @@
     <nav class="navbar navbar-expand-xl navbar-light px-2 py-3 fixed-top bg-light shadow shadow-sm">
         <div class="navbar-brand d-flex align-items-center justify-content-center">
             <img src="images/logo.png" alt="logo"> &nbsp;
-            <h4 class="text-danger">EULOGIO RODRIGUEZ VOCATIONAL HIGH SCHOOL</h2>
+            <h4 class="text-danger navbar-brand-text">EULOGIO RODRIGUEZ VOCATIONAL HIGH SCHOOL</h2>
         </div>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
             <span class="navbar-toggler-icon"></span>
           </button>
 
+          <div class="offcanvas offcanvas-end" id="offcanvas">
+            <div class="offcanvas-header">
+                <div class="offcanvas-title text-danger">EULOGIO RODRIGUEZ VOCATIONAL HIGH SCHOOL</div>
+                <div class="btn-close" type="button" data-bs-toggle="offcanvas"></div>
+            </div>
 
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="nav ms-auto">
+            <div class="offcanvas-body">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link text-danger">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#announcement" class="nav-link text-danger">ANNOUNCEMENT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link text-danger">ABOUT US</a>
+                    </li>   
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link text-danger">CONTACT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.php" class="nav-link text-danger">LOGIN</a>
+                    </li>
+                </ul>
+            </div>
+
+          </div>
+
+
+
+
+            <ul class="nav ms-auto normal-nav">
                 <li class="nav-item">
                     <a href="#home" class="nav-link text-danger">HOME</a>
                 </li>
@@ -40,7 +69,6 @@
                     <a href="login.php" class="nav-link text-danger">LOGIN</a>
                 </li>
             </ul>
-        </div>
     </nav>
 
     <main class="hero-section" id="home">
@@ -116,53 +144,57 @@
     </section>
 
     <section class="about-section p-5" id="about">
-        <div class="display-3 mt-5 text-light">
-            Get to Know Us
-        </div> 
+       
 
         <div class="about-content">
-            <!-- Carousel -->
-            <div id="demo" class="carousel slide shadow" data-bs-ride="carousel">
 
-                <!-- Indicators/dots -->
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-                    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+            <div class="carousel-parent container-fluid">    
+                <div class="display-3 mt-5 text-light">
+                    Get to Know Us
+                </div> 
+                <!-- Carousel -->
+                <div id="demo" class="carousel slide shadow" data-bs-ride="carousel">
+
+                    <!-- Indicators/dots -->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                    </div>
+        
+                    <!-- The slideshow/carousel -->
+                    <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images/announcement-1.jpg" class="img-fluid">
+                            <div class="carousel-caption">
+                                <h3>lorem</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, vero?</p>
+                            </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/announcement-2.jpg" class="img-fluid">
+                            <div class="carousel-caption">
+                                <h3>lorem</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, itaque.</p>
+                            </div> 
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/announcement-3.jpg" class="img-fluid">
+                            <div class="carousel-caption">
+                                <h3>lorem</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae, amet.</p>
+                            </div>  
+                    </div>
+                    </div>
+        
+                    <!-- Left and right controls/icons -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                    </button>
                 </div>
-    
-                <!-- The slideshow/carousel -->
-                <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="images/announcement-1.jpg" class="img-fluid">
-                        <div class="carousel-caption">
-                            <h3>lorem</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, vero?</p>
-                        </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="images/announcement-2.jpg" class="img-fluid">
-                        <div class="carousel-caption">
-                            <h3>lorem</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, itaque.</p>
-                        </div> 
-                </div>
-                <div class="carousel-item">
-                    <img src="images/announcement-3.jpg" class="img-fluid">
-                        <div class="carousel-caption">
-                            <h3>lorem</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae, amet.</p>
-                        </div>  
-                </div>
-                </div>
-    
-                <!-- Left and right controls/icons -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-                </button>
             </div>
 
 

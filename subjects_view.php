@@ -133,7 +133,7 @@ if (isset($_SESSION['student_logged_in'])) {
                 <?php endif; ?>
 
                 <div class="container-fluid mt-3 d-flex justify-content-end">
-                     <a class="btn btn-dark"href="parent_dashboard.php">Back to dashboard</a>
+                     <a class="btn btn-dark"href="student_dashboard.php">Back to dashboard</a>
 
                 </div>
 
