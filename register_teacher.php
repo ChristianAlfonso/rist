@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </li>
 
                     <li class="nav-item">
-                        <a href="change_password.php">Change Password</a>
+                        <a data-bs-toggle="modal" data-bs-target="#changePassword" href="change_password.php">Change Password</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -144,6 +144,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 </ul>
             </div>
+        </div>
+
+        <div class="modal" id="changePassword">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Change Password</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POST" action="change_password.php">
+                                            <label for="current_password">Current Password:</label><br>
+                                            <input class="form-control" type="password" name="current_password" required><br>
+
+                                            <label for="new_password">New Password:</label><br>
+                                            <input class="form-control" type="password" name="new_password" required><br>
+
+                                            <label for="confirm_password">Confirm New Password:</label><br>
+                                            <input class="form-control" type="password" name="confirm_password" required><br><br>
+
+                                            <button class="btn btn-danger" type="submit">Change Password</button>
+
+                                            <a class="btn btn-dark" href="<?php echo (isset($_SESSION['student_logged_in']) ? "student_dashboard.php" : (isset($_SESSION['parent_logged_in']) ? "parent_dashboard.php" : (isset($_SESSION['admin_logged_in']) ? "register_teacher.php" : ""))); ?>">Cancel</a>
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            </div>
         </div>
 
         <div class="main-content flex-grow-1 p-3">
@@ -221,19 +249,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="text" name="subject" class="form-control" required>
                     </div>
 
-                    <div class="d-flex" style="gap: 5px">
+                    <div class="row">
 
-                        <div class="form-group" style="flex: 1;">
+                        <div class="form-group col-sm col-md-4">
                             <label for="last_name">Last Name:</label>
                             <input type="text" name="last_name" class="form-control" required>
                         </div>
                         
-                        <div class="form-group" style="flex: 1;">
+                        <div class="form-group col-sm col-md-4">
                             <label for="first_name">First Name:</label>
                             <input type="text" name="first_name" class="form-control" required>
                         </div>
 
-                        <div class="form-group" style="flex: 1;">
+                        <div class="form-group col-sm col-md-4">
                             <label for="middle_initial">Middle Initial:</label>
                             <input type="text" name="middle_initial" class="form-control" required>
                         </div>

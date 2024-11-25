@@ -7,9 +7,6 @@
   scroll-behavior: smooth;
 }
 
-.landing-page {
-  min-width: 1200px;
-}
 .landing-page .navbar .navbar-brand img {
   width: 50px;
 }
@@ -76,10 +73,10 @@
   justify-content: center;
   align-items: center;
 }
-.landing-page .about-section .about-content .carousel {
+.landing-page .about-section .about-content .carousel-parent {
   flex: 1;
 }
-.landing-page .about-section .about-content .carousel .carousel-inner .carousel-item img {
+.landing-page .about-section .about-content .carousel-parent .carousel .carousel-inner .carousel-item img {
   width: 900px;
   height: 60vh;
   aspect-ratio: 2/2;
@@ -89,6 +86,14 @@
   height: auto;
 }
 
+@media (max-width: 1230px) {
+  .navbar-brand-text, .normal-nav {
+    display: none;
+  }
+  .about-content {
+    flex-direction: column;
+  }
+}
 .login-page {
   background: url(images/bg.jpg);
   background-size: cover;
