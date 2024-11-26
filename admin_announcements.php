@@ -325,11 +325,12 @@ if (isset($_GET['edit_id'])) {
                 $result = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($result) > 0) {
-                    echo "<table class='table table-bordered table-stripped' id='example'>";
+                    echo "<table class='table table-bordered table-striped' id='example'>";
                     echo "<thead><tr class='bg-danger text-light'><th>Title</th><th>Content</th><th>Audience</th><th>Date Posted</th><th>Actions</th></tr></thead>";
+                    echo "<tbody>";
 
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tbody><tr>";
+                        echo "<tr>";
                         echo "<td>" . $row['title'] . "</td>";
                         echo "<td>" . $row['content'] . "</td>";
                         echo "<td>" . $row['audience'] . "</td>";
@@ -338,9 +339,10 @@ if (isset($_GET['edit_id'])) {
                                 <a class='btn btn-dark' href='admin_announcements.php?edit_id=" . $row['id'] . "'>Edit</a>
                                 <a class='btn btn-danger' href='admin_announcements.php?delete_id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this announcement?\");'>Delete</a>
                             </td>";
-                        echo "</tr></tbody>";
+                        echo "</tr>";
                     }
 
+                    echo "</tbody>";
                     echo "</table>";
                 } else {
                     echo "No announcements found.";
@@ -363,9 +365,11 @@ if (isset($_GET['edit_id'])) {
   
 
     <script>
-        new DataTable('#example', {
+        $(document).ready(function() {
+            $('#example').DataTable({
                 responsive: true
             });
+        });
 
         // Auto close offcanvas when screen size changes
         window.addEventListener('resize', function() {

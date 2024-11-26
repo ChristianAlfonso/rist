@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   VALUES ('$lrn', '$last_name', '$first_name', '$middle_initial', '$email', '$year', '$section', '$school_year', '$username', '$password')";
         
        
-            echo "<script>alert('Student registered successfully!'); window.location='student_dashboard.php';</script>";
+            echo "<script>alert('Student registered successfully!'); window.location='users_students.php';</script>";
       
     } else {
         echo "<script>alert('Error: Please fill out all required fields.');</script>";
