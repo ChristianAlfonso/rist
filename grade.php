@@ -187,7 +187,9 @@ $grades = mysqli_fetch_assoc($grades_result);
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['student_lrn']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['scores']) . "</td>";
+                       while($row['scores'] = json_decode($row['scores'], true)){
+                            echo "<td>" . implode(", ", $row['scores']) . "</td>";
+                       }
                         echo "</tr>";
                     }
                     ?>

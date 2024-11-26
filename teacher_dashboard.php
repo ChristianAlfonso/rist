@@ -126,7 +126,7 @@ $subjects_result = $subjects_query->get_result();
                                 <a href="#feedback" data-bs-toggle="tab" class="nav-link">Feedback</a>
                             </li>
                             <li class="nav-item">
-                                <a href="login.php" class="nav-link">Logout</a>
+                                <a href="logout.php" class="nav-link">Logout</a>
                             </li>
                         </ul>
                     </div>

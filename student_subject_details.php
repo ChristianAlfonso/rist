@@ -7,7 +7,6 @@ if (!isset($_SESSION['student_logged_in']) && !isset($_SESSION['parent_logged_in
     header("Location: login.php");
     exit();
 }
-
 // Get the subject from the URL
 if (isset($_GET['subject'])) {
     $subject_name = $_GET['subject'];
@@ -16,10 +15,12 @@ if (isset($_GET['subject'])) {
     header("Location: subjects_view.php");
     exit();
 }
-
 // Initialize year and section variables
 $year = null;
 $section = null;
+$student_session = $_SESSION['student_logged_in'] ?? null;
+$parent_session = $_SESSION['parent_logged_in'] ?? null;
+
 
 // Fetch the student's or parent's year and section
 if (isset($_SESSION['student_logged_in'])) {
@@ -105,7 +106,17 @@ if (isset($_SESSION['student_logged_in'])) {
                     <a class="btn btn-success" href="attendance_view.php?subject=<?php echo urlencode($subject_name); ?>">Attendance</a>
                     <a class="btn btn-danger" href="grade_view.php?subject=<?php echo urlencode($subject_name); ?>">Grade</a>
                     <a class="btn btn-primary" href="subjects_view.php">Back to Subjects</a>
-                    <a class="btn btn-dark btn-equal" href="teacher_dashboard.php">Back to Dashboard</a>
+                    <?php
+                 if($student_session){
+                    $href = "student_dashboard.php";
+                }else if ($parent_session){
+                    $href = "parent_dashboard.php";
+                }
+              echo "
+              <div class='container-fluid mt-3 d-flex justify-content-end'>
+                     <a class='btn btn-dark'href='{$href}'>Back to dashboard</a>
+                </div>"
+                    ?>
                 </div>
         </div>
 </div>

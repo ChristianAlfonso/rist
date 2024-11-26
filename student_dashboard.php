@@ -129,7 +129,7 @@ $year_levels_result = mysqli_query($conn, $year_levels_query);
                                 <a href="view_ranking.php?year=<?php echo $year?>&section=<?php echo $section?>" class="nav-link">Your Ranking</a>
                             </li>
                             <li class="nav-item">
-                                <a href="login.php" class="nav-link">Logout</a>
+                                <a href="logout.php" class="nav-link">Logout</a>
                             </li>
                         </ul>
                     </div>

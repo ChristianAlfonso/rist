@@ -7,7 +7,6 @@ if (!isset($_SESSION['parent_logged_in'])) {
     header("Location: login.php");
     exit();
 }
-
 // Fetch parent details
 $username = $_SESSION['parent_username'];
 $query = $conn->prepare("SELECT * FROM parents WHERE username = ?");
@@ -119,7 +118,7 @@ $year_levels_result = mysqli_query($conn, $year_levels_query);
                                 <a href="#feedback" data-bs-toggle="tab" class="nav-link">Feedback</a>
                             </li>
                             <li class="nav-item">
-                                <a href="login.php" class="nav-link">Logout</a>
+                                <a href="logout.php" class="nav-link">Logout</a>
                             </li>
                         </ul>
                     </div>

@@ -13,11 +13,11 @@
         if ($role === 'admin') {
             $query = "SELECT * FROM admin WHERE username='$username' AND password='$password'";
         } elseif ($role === 'teacher') {
-            $query = "SELECT * FROM teachers WHERE username='$username'";
+            $query = "SELECT * FROM teachers WHERE username='$username' AND password='$password'";
         } elseif ($role === 'parent') {
-            $query = "SELECT * FROM parents WHERE username='$username'";
+            $query = "SELECT * FROM parents WHERE username='$username' AND password='$password'";
         } elseif ($role === 'student') {
-            $query = "SELECT * FROM students WHERE username='$username'";
+            $query = "SELECT * FROM students WHERE username='$username' AND password='$password'";
         }
 
         // Execute the query
@@ -29,7 +29,7 @@
                     // Set session variables based on role
                     $_SESSION[$role . '_logged_in'] = true;
                     $_SESSION[$role . '_username'] = $username;
-
+                    var_dump($_SESSION['teacher_logged_in']);
                     // Redirect to the appropriate dashboard
                     if ($role === 'admin') {
                         header("Location: admin_announcements.php");

@@ -7,11 +7,12 @@ if (!isset($_SESSION['student_logged_in']) && !isset($_SESSION['parent_logged_in
     header("Location: login.php");
     exit();
 }
-
+$student_session = $_SESSION['student_logged_in'] ?? null;
+$parent_session = $_SESSION['parent_logged_in'] ?? null;
 // Initialize year and section variables
 $year = null;
 $section = null;
-
+var_dump($_SESSION['parent_logged_in']);
 // Fetch the student's or parent's LRN
 if (isset($_SESSION['student_logged_in'])) {
     $username = $_SESSION['student_username'];
@@ -132,10 +133,17 @@ if (isset($_SESSION['student_logged_in'])) {
                     <p>No subjects available for this year and section.</p>
                 <?php endif; ?>
 
-                <div class="container-fluid mt-3 d-flex justify-content-end">
-                     <a class="btn btn-dark"href="student_dashboard.php">Back to dashboard</a>
-
-                </div>
+                <?php
+                if($student_session){
+                    $href = "student_dashboard.php";
+                }else if ($parent_session){
+                    $href = "parent_dashboard.php";
+                }
+              echo "
+              <div class='container-fluid mt-3 d-flex justify-content-end'>
+                     <a class='btn btn-dark'href='{$href}'>Back to dashboard</a>
+                </div>"
+                ?>
 
                   
             </div>
