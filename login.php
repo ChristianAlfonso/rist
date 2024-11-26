@@ -11,13 +11,13 @@
         // Determine the correct table based on role
         $query = "";
         if ($role === 'admin') {
-            $query = "SELECT * FROM admin WHERE username='$username' AND password='$password'";
+            $query = "SELECT * FROM admin WHERE username='$username'";
         } elseif ($role === 'teacher') {
-            $query = "SELECT * FROM teachers WHERE username='$username' AND password='$password'";
+            $query = "SELECT * FROM teachers WHERE username='$username'";
         } elseif ($role === 'parent') {
-            $query = "SELECT * FROM parents WHERE username='$username' AND password='$password'";
+            $query = "SELECT * FROM parents WHERE username='$username'";
         } elseif ($role === 'student') {
-            $query = "SELECT * FROM students WHERE username='$username' AND password='$password'";
+            $query = "SELECT * FROM students WHERE username='$username'";
         }
 
         // Execute the query
