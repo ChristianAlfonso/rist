@@ -80,6 +80,10 @@ if (isset($_GET['delete_id'])) {
     .burger {
         display: none;
     }
+
+    .main-content {
+            overflow-y: scroll
+        }
     
     @media (max-width: 700px) {
         .sidebar {
@@ -192,7 +196,7 @@ if (isset($_GET['delete_id'])) {
                             </div>
         </div>
 
-        <div class="main-content flex-grow-1 p-3 w-100">
+        <div class="main-content flex-grow-1 h-100 p-3">
             <div class="container-fluid d-flex justify-content-between">
             <h1>Registered Teachers</h1>
             <button class="navbar-toggler navbar-light burger" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" aria-controls="demo">

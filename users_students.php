@@ -58,6 +58,10 @@ $students_result = mysqli_query($conn, $students_query);
     .burger {
         display: none;
     }
+
+    .main-content {
+            overflow-y: scroll
+        }
     
     @media (max-width: 700px) {
         .sidebar {
@@ -169,7 +173,7 @@ $students_result = mysqli_query($conn, $students_query);
                             </div>
         </div>
 
-    <div class="main-content flex-grow-1 p-3 w-100">
+        <div class="main-content flex-grow-1 h-100 p-3">
 
         <div class="container-fluid d-flex justify-content-between">
             <h1 class="mb-3">Registered Students</h1>

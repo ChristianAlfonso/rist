@@ -79,7 +79,6 @@ if (isset($_GET['edit_id'])) {
         
     }
 
-
     .nav-item {
         width: 100%;
         padding: 10px;
@@ -93,7 +92,6 @@ if (isset($_GET['edit_id'])) {
         color: #982718;
         font-weight: bold;
     }
-    
 
     img {
         width: 50px;
@@ -107,6 +105,10 @@ if (isset($_GET['edit_id'])) {
         display: none;
     }
     
+    .main-content {
+        overflow-y: scroll;
+    }
+
     @media (max-width: 700px) {
         .sidebar {
             display: none;
@@ -211,11 +213,11 @@ if (isset($_GET['edit_id'])) {
                             </div>
         </div>
         
-    <div class="main-content flex-grow-1 w-100 p-3">
+    <div class="main-content flex-grow-1 h-100 p-3">
 
-    <div class="container-fluid d-flex justify-content-between">
-    <h2><?php echo isset($edit_announcement) ? 'Edit Announcement' : 'Post Announcement'; ?></h2>
-    <button class="navbar-toggler navbar-light burger" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" aria-controls="demo">
+        <div class="container-fluid d-flex justify-content-between">
+        <h2><?php echo isset($edit_announcement) ? 'Edit Announcement' : 'Post Announcement'; ?></h2>
+        <button class="navbar-toggler navbar-light burger" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" aria-controls="demo">
                 <span class="navbar-toggler-icon"></span>
             </button>
 

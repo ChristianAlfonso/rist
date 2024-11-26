@@ -85,6 +85,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['parent_file'])) {
     .burger {
         display: none;
     }
+
+    .main-content {
+            overflow-y: scroll
+        }
     
     @media (max-width: 700px) {
         .sidebar {
@@ -188,7 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['parent_file'])) {
                             </div>
         </div>
 
-    <div class="main-content flex-grow-1 p-3">
+        <div class="main-content flex-grow-1 h-100 p-3">
     <div class="container-fluid d-flex justify-content-between">
     <h2>Import Parents (CSV)</h2>
     <button class="navbar-toggler navbar-light burger" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" aria-controls="demo">

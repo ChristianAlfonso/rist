@@ -86,6 +86,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['teacher_file'])) {
     .burger {
         display: none;
     }
+
+    .main-content {
+            overflow-y: scroll
+        }
     
     @media (max-width: 700px) {
         .sidebar {
@@ -191,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['teacher_file'])) {
         </div>
     
 
-    <div class="main-content flex-grow-1 p-3">
+        <div class="main-content flex-grow-1 h-100 p-3">
         
         <div class="container-fluid d-flex justify-content-between">
             <h2>Import Teachers (CSV)</h2>
