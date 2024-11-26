@@ -76,8 +76,21 @@ if (isset($_GET['edit_id'])) {
 
     .admin-announcement-page {
         height: 100vh;
-        
+        background: url('images/bg.jpg') no-repeat center / cover;
     }
+
+        .admin-announcement-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        filter: blur(10px);
+        z-index: -1;
+    }
+
 
     .nav-item {
         width: 100%;
@@ -124,13 +137,13 @@ if (isset($_GET['edit_id'])) {
 <body>
 
 <div class="admin-announcement-page d-flex">
-    <div class="sidebar shadow p-3">
+    <div class="sidebar bg-light shadow p-3">
         <div class="sidebar-title d-flex align-items-center">
             <img src="images/logo.png" alt="">
             <h5>Admin Dashboard</h5>
         </div>
 
-        <div class="sidebar-menu mt-3">
+        <div class="sidebar-menu bg-light mt-3">
             <ul class="nav">
                 <li class="nav-item">
                     <a href="admin_announcements.php">Announcements</a>
@@ -185,7 +198,7 @@ if (isset($_GET['edit_id'])) {
 
       <!--Modal for change password-->
 
-        <div class="modal" id="changePassword">
+        <div class="modal bg-light" id="changePassword">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -216,13 +229,13 @@ if (isset($_GET['edit_id'])) {
     <div class="main-content flex-grow-1 h-100 p-3">
 
         <div class="container-fluid d-flex justify-content-between">
-        <h2><?php echo isset($edit_announcement) ? 'Edit Announcement' : 'Post Announcement'; ?></h2>
+        <h2 class="text-white"><?php echo isset($edit_announcement) ? 'Edit Announcement' : 'Post Announcement'; ?></h2>
         <button class="navbar-toggler navbar-light burger" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" aria-controls="demo">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
                 <!-- Offcanvas Sidebar -->
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="demo" aria-labelledby="offcanvasDemoLabel">
+                <div class="offcanvas bg-light offcanvas-end" tabindex="-1" id="demo" aria-labelledby="offcanvasDemoLabel">
                     
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="offcanvasDemoLabel">Sidebar Menu</h5>
@@ -274,7 +287,7 @@ if (isset($_GET['edit_id'])) {
                         </div>
                 </div>
         </div>
-            <div class="container-fluid shadow  p-5">
+            <div class="container-fluid bg-light shadow  p-5">
                 <form method="POST" action="admin_announcements.php">
                         <input type="hidden" name="id" value="<?php echo isset($edit_announcement) ? $edit_announcement['id'] : ''; ?>">
                         
@@ -299,11 +312,11 @@ if (isset($_GET['edit_id'])) {
             </div>
 
             <div class="container-fluid">
-                <h2 class="mt-3">Manage Announcements</h2>
+                <h2 class="mt-3 text-white">Manage Announcements</h2>
             </div>
         
 
-            <div class="container-fluid shadow p-3">
+            <div class="container-fluid bg-light shadow p-3">
 
                 <!-- List of announcements with Edit and Delete options -->
                 <?php

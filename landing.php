@@ -30,13 +30,13 @@
             <div class="offcanvas-body">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a href="#home" class="nav-link text-danger">HOME</a>
+                        <a href="#about" class="nav-link text-danger">HOME</a>
                     </li>
                     <li class="nav-item">
                         <a href="#announcement" class="nav-link text-danger">ANNOUNCEMENT</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link text-danger">ABOUT US</a>
+                        <a href="#home" class="nav-link text-danger">ABOUT US</a>
                     </li>   
                     <li class="nav-item">
                         <a href="#contact" class="nav-link text-danger">CONTACT</a>
@@ -54,13 +54,13 @@
 
             <ul class="nav ms-auto normal-nav">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link text-danger">HOME</a>
+                    <a href="#about" class="nav-link text-danger">HOME</a>
                 </li>
                 <li class="nav-item">
                     <a href="#announcement" class="nav-link text-danger">ANNOUNCEMENT</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#about" class="nav-link text-danger">ABOUT US</a>
+                    <a href="#home" class="nav-link text-danger">ABOUT US</a>
                 </li>   
                 <li class="nav-item">
                     <a href="#contact" class="nav-link text-danger">CONTACT</a>
@@ -71,16 +71,126 @@
             </ul>
     </nav>
 
-    <main class="hero-section" id="home">
-        <div class="hero-content container p-5">
-            <div class="hero-title text-center text-light">
-                <span class="display-4">ONLINE ACADEMIC PERFORMANCE MONITORING</span>
+    <section class="about-section p-5" id="about">
+       
+
+        <div class="about-content">
+
+            <div class="carousel-parent container-fluid">    
+                <div class="display-3 mt-5 text-light">
+                    Get to Know Us
+                </div> 
+                <!-- Carousel -->
+                <div id="demo" class="carousel slide shadow" data-bs-ride="carousel">
+
+                    <!-- Indicators/dots -->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                    </div>
+        
+                    <!-- The slideshow/carousel -->
+                    <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images/announcement-1.jpg" class="img-fluid">
+                            <div class="carousel-caption">
+                                <h3>lorem</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, vero?</p>
+                            </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/announcement-2.jpg" class="img-fluid">
+                            <div class="carousel-caption">
+                                <h3>lorem</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, itaque.</p>
+                            </div> 
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/announcement-3.jpg" class="img-fluid">
+                            <div class="carousel-caption">
+                                <h3>lorem</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae, amet.</p>
+                            </div>  
+                    </div>
+                    </div>
+        
+                    <!-- Left and right controls/icons -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
             </div>
-            <div class="hero-button mt-5 justify-content-center d-flex">
-                <a href="https://www.facebook.com/EarvhsOfficial" type="button" class="btn btn-outline-light w-25">VISIT US</a>
+
+
+            <div class="about-text">
+                <div class="container mt-3">
+                    <h2 class="text-light">ERVHS</h2>
+                    <p class="text-light">Our school is more than just a place for education; it is a nurturing community where dreams are cultivated, and values are instilled. We take pride in providing a well-rounded curriculum that balances academic excellence with extracurricular activities, helping students explore their passions and talents. Modern facilities, innovative teaching methods, and a commitment to inclusivity ensure that every student feels empowered to succeed. Beyond academics, we emphasize character building, teamwork, and leadership skills, preparing students to thrive in an ever-changing world. Together, we create memories, friendships, and a legacy of excellence that lasts a lifetime.</p>
+                    <div id="accordion">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
+                              What is Eulogio Rodriguez Vocational High School?
+                            </a>
+                          </div>
+                          <div id="collapseOne" class="collapse" data-bs-parent="#accordion">
+                            <div class="card-body">
+                            Our school is a vibrant hub of learning and growth, where students are inspired to achieve their full potential. With dedicated teachers, a supportive community, and a variety of enriching programs, we strive to foster a love for education and personal development. Our campus provides a safe and welcoming environment, encouraging creativity, collaboration, and respect for diversity. Together, we aim to build a strong foundation for academic success and lifelong learning.
+                            </div>
+                          </div>
+                        </div>
+            
+                        <div class="card">
+                          <div class="card-header">
+                            <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
+                              Our Mission
+                          </a>
+                          </div>
+                          <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                            <div class="card-body">
+                                To protect and promote the right of every Filipino to quality, equitable, culture-based, and complete basic education where:
+                                <br>
+                                Students learn in a child-friendly, gender-sensitive, safe and motivating environment.
+                                Teachers facilitate learning and constantly nurture every learner.
+                                Administrators and staff, as stewards of the institution, ensure an enabling and supportive environment for effective learning to happen.
+                                Family, community, and other stakeholders are actively engaged and share responsibility for developing life-long learners.
+                            </div>
+                          </div>
+                        </div>
+            
+                        <div class="card">
+                          <div class="card-header">
+                            <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">
+                                Our Vision
+                            </a>
+                          </div>
+                          <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+                            <div class="card-body">
+                                 We dream of Filipinos who passionately love their country and whose values and competencies enable them to realize their full potential and contribute meaningfully to building the nation. 
+                                 As a learner-centered public institution, the Department of Education continuously improves itself to better serve its stakeholders.
+                            </div>
+                          </div>
+                        </div>
+            
+                       
+                        
+                      </div>
+                </div>
             </div>
+  
+ 
         </div>
-    </main>
+
+       
+
+    </section>
+
+    
 
     <section class="announcement-section bg-light p-5 " id="announcement">
 
@@ -143,118 +253,18 @@
 
     </section>
 
-    <section class="about-section p-5" id="about">
-       
-
-        <div class="about-content">
-
-            <div class="carousel-parent container-fluid">    
-                <div class="display-3 mt-5 text-light">
-                    Get to Know Us
-                </div> 
-                <!-- Carousel -->
-                <div id="demo" class="carousel slide shadow" data-bs-ride="carousel">
-
-                    <!-- Indicators/dots -->
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-                        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-                        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-                    </div>
-        
-                    <!-- The slideshow/carousel -->
-                    <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="images/announcement-1.jpg" class="img-fluid">
-                            <div class="carousel-caption">
-                                <h3>lorem</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, vero?</p>
-                            </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/announcement-2.jpg" class="img-fluid">
-                            <div class="carousel-caption">
-                                <h3>lorem</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, itaque.</p>
-                            </div> 
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/announcement-3.jpg" class="img-fluid">
-                            <div class="carousel-caption">
-                                <h3>lorem</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae, amet.</p>
-                            </div>  
-                    </div>
-                    </div>
-        
-                    <!-- Left and right controls/icons -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                    </button>
-                </div>
+    <main class="hero-section" id="home">
+        <div class="hero-content container p-5">
+            <div class="hero-title text-center text-light">
+                <span class="display-4">ONLINE ACADEMIC PERFORMANCE MONITORING</span>
             </div>
-
-
-            <div class="about-text">
-                <div class="container mt-3">
-                    <h2 class="text-light">lorem</h2>
-                    <p class="text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quae, molestiae et tempore odio mollitia natus aliquam necessitatibus! Magnam labore adipisci eius tempora commodi animi voluptatem ut, architecto itaque est?</p>
-                    <div id="accordion">
-
-                        <div class="card">
-                          <div class="card-header">
-                            <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
-                              What is Eulogio Rodriguez Vocational High School?
-                            </a>
-                          </div>
-                          <div id="collapseOne" class="collapse" data-bs-parent="#accordion">
-                            <div class="card-body">
-                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum ipsa suscipit neque magnam nulla aspernatur tempora ad, similique exercitationem numquam eos aliquid. Nostrum iste, sapiente ducimus similique saepe dolores repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, voluptate consequatur consequuntur distinctio porro eius vitae optio rerum corrupti earum non exercitationem quos, animi iure totam accusamus quasi, dignissimos fugit?
-                            </div>
-                          </div>
-                        </div>
-            
-                        <div class="card">
-                          <div class="card-header">
-                            <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
-                              What is the purpose of this website?
-                          </a>
-                          </div>
-                          <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
-                            <div class="card-body">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </div>
-                          </div>
-                        </div>
-            
-                        <div class="card">
-                          <div class="card-header">
-                            <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">
-                            Mission and Vision of Eulogio Rodriguez Vocational High School?
-                            </a>
-                          </div>
-                          <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
-                            <div class="card-body">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </div>
-                          </div>
-                        </div>
-            
-                       
-                        
-                      </div>
-                </div>
+            <div class="hero-button mt-5 justify-content-center d-flex">
+                <a href="https://www.facebook.com/EarvhsOfficial" type="button" class="btn btn-outline-light w-25">VISIT US</a>
             </div>
-  
- 
         </div>
+    </main>
 
-       
-
-    </section>
+    
 
     <section class="contact-section p-5 bg-light" id="contact">
     <div class="container-fluid">

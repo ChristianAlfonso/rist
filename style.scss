@@ -34,7 +34,7 @@
 
     .hero-section {
         position: relative;
-        background-image: url(images/hero-bg.jpg);
+        background-image: url(images/bg2.jpg);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -95,6 +95,7 @@
         background: url(images/bg.jpg);
         background-repeat: no-repeat;
         background-size: cover;
+        background-attachment: fixed;
 
         .about-content {
             display: flex;
