@@ -147,7 +147,21 @@ $grades_result = mysqli_query($conn, $grades_query);
                     <?php endif; ?>
 
                 <div class="container-fluid mt-3 d-flex justify-content-end">
-                     <a class="btn btn-dark"href="parent_dashboard.php">Back to dashboard</a>
+                <?php 
+                    switch ($role) {
+                        case 'student':
+                            $dashboard_url = 'student_dashboard.php';
+                            break;
+                        case 'parent':
+                            $dashboard_url = 'parent_dashboard.php';
+                            break;
+                        default:
+                            $dashboard_url = '';
+                            break;
+                    }
+                    if ($dashboard_url): ?>
+                        <a class="btn btn-dark" href="<?php echo $dashboard_url; ?>">Back to dashboard</a>
+                    <?php endif; ?>
                 </div>
 
                   

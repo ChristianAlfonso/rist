@@ -10,10 +10,10 @@ if (!isset($_SESSION['student_logged_in']) && !isset($_SESSION['parent_logged_in
 
 // Determine if the logged-in user is a student or a parent
 $user_id = isset($_SESSION['student_logged_in']) ? $_SESSION['student_username'] : $_SESSION['parent_username'];
-$user_type = isset($_SESSION['student_logged_in']) ? 'student' : 'parent';
+$role = isset($_SESSION['student_logged_in']) ? 'student' : 'parent';
 
 // Get student LRN or child's LRN (for parent)
-$student_lrn = $user_type === 'student' ? $user_id : getChildLrn($user_id);
+$student_lrn = $role === 'student' ? $user_id : getChildLrn($user_id);
 
 // Fetch subject from URL
 $subject_name = isset($_GET['subject']) ? mysqli_real_escape_string($conn, $_GET['subject']) : '';
@@ -196,8 +196,23 @@ if ($subject_id) {
             </table>
         </div>
         <div class="container-fluid d-flex justify-content-end" style="gap: 5px; flex-wrap: wrap;">
-            <a class="btn btn-dark shadow" href="parent_dashboard.php">Back to dashboard</a>
 
+            <?php 
+                switch ($role) {
+                    case 'student':
+                        $dashboard_url = 'student_dashboard.php';
+                        break;
+                    case 'parent':
+                        $dashboard_url = 'parent_dashboard.php';
+                        break;
+                    default:
+                        $dashboard_url = '';
+                        break;
+                }
+                if ($dashboard_url): ?>
+                    <a class="btn btn-dark" href="<?php echo $dashboard_url; ?>">Back to dashboard</a>
+            <?php endif; ?>
+        
             <button class="btn btn-danger shadow" onclick="printAttendanceReport()">Print Report</button>
         </div>
 
