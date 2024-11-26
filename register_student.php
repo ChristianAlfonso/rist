@@ -21,11 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = "INSERT INTO students (lrn, last_name, first_name, middle_initial, email, year, section, school_year, username, password) 
                   VALUES ('$lrn', '$last_name', '$first_name', '$middle_initial', '$email', '$year', '$section', '$school_year', '$username', '$password')";
         
-        if (mysqli_query($conn, $query)) {
+       
             echo "<script>alert('Student registered successfully!'); window.location='student_dashboard.php';</script>";
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
+      
     } else {
         echo "<script>alert('Error: Please fill out all required fields.');</script>";
     }

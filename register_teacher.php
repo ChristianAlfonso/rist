@@ -19,11 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = "INSERT INTO teachers (id, subject, last_name, first_name, middle_initial, email, username, password) 
                   VALUES ('$id', '$subject', '$last_name', '$first_name', '$middle_initial', '$email', '$username', '$password')";
         
-        if (mysqli_query($conn, $query)) {
+       
             echo "<script>alert('Teacher registered successfully!'); window.location='users_teachers.php';</script>";
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
+       
     } else {
         echo "<script>alert('Error: Please fill out all required fields.');</script>";
     }
